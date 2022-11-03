@@ -25,8 +25,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                                    <small class="text-muted">{{ auth()->user()->name }}</small>
                                 </div>
                             </div>
                         </a>
@@ -37,16 +37,16 @@
                     <li>
                         <a class="dropdown-item" href="#">
                             <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
+                            <span class="align-middle">Mi Perfil</span>
                         </a>
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="auth-login-basic.html">
+                        <a class="dropdown-item" href="{{ route('logout') }}">
                             <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Log Out</span>
+                            <span class="align-middle">Cerrar sesion</span>
                         </a>
                     </li>
                 </ul>

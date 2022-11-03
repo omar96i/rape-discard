@@ -19,7 +19,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/small_icon.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,67 +49,34 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    @vite('resources/css/app.css')
   </head>
 
   <body>
     <!-- Content -->
-
     <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          <!-- Register -->
-          <div class="card">
-            <div class="card-body">
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
-                  <span class="app-brand-text demo text-body fw-bolder">Rak-pereira</span>
-                </a>
-              </div>
-              <!-- /Logo -->
-              <h4 class="mb-2">Bienvenido a Rak-pereira! 👋</h4>
-              <p class="mb-4">Porfavor ingresa tu usuario y contraseña para empezar a administrar tu empresa</p>
-
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Correo</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="email-username"
-                    placeholder="Enter your email or username"
-                    autofocus
-                  />
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Contraseña</label>
-                    <a href="#">
-                      <small>Olvido su contraseña?</small>
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner">
+            <!-- Register -->
+            <div class="card">
+                <div class="card-body">
+                <!-- Logo -->
+                <div class="app-brand justify-content-center">
+                    <a href="index.html" class="app-brand-link gap-2">
+                        <img src="./assets/img/icon.png" style="width: 100%;" alt="">
                     </a>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
                 </div>
-                <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Entrar</button>
+                <!-- /Logo -->
+                <h4 class="mb-2">Bienvenido a RAP-EJE-PEREIRA! 👋</h4>
+                <p class="mb-4">Porfavor ingresa tu usuario y contraseña para empezar a administrar tu empresa</p>
+                    <div id="app">
+                        <login-index></login-index>
+                    </div>
                 </div>
-              </form>
             </div>
-          </div>
-          <!-- /Register -->
+            <!-- /Register -->
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Core JS -->
@@ -131,5 +98,6 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    @vite('resources/js/app.js')
   </body>
 </html>

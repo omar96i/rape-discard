@@ -1,9 +1,19 @@
 import './bootstrap';
 
-import {createApp} from 'vue'
+import {createApp} from 'vue/dist/vue.esm-bundler'
 
-import App from './components/App.vue'
+import IndexHome from './components/App.vue'
+import IndexLogin from './components/login/App.vue'
 
-const app = createApp(App)
-app.component('index-app', App)
-app.mount("#app")
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+
+const app = createApp({
+    components: {
+        'login-index': IndexLogin,
+        'index-home': IndexHome,
+    },
+},);
+app.use(VueSweetalert2);
+app.mount('#app')
