@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,13 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::prefix('ofertas-turisticas')->controller(OfertaTuristicaController::class)->group(function () {
+        Route::get('/', 'index')->name('oferta.turistica.index');
+        Route::get('/get', 'get')->name('oferta.turistica.get');
+        Route::get('/getData/{proyect}', 'getData')->name('oferta.turistica.get.data');
+        Route::post('/store', 'store')->name('oferta.turistica.store');
+        Route::post('/update/{proyect}', 'update')->name('oferta.turistica.update');
+        Route::get('/delete/{proyect}', 'delete')->name('oferta.turistica.delete');
+    });
 
 });

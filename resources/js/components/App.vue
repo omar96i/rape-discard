@@ -1,11 +1,3 @@
 <template>
-    <div id="uno">
-        hello
-    </div>
+    Bievenido!
 </template>
-<script>
-export default{
-    created(){
-    }
-}
-</script>
