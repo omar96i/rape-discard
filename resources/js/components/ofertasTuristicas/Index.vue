@@ -24,8 +24,8 @@
 
             <template #item-actions="item">
                 <div class="operation-wrapper">
-                    <a href="#" class="btn btn-primary btn-sm" @click="action('edit', item.id)" data-bs-toggle="modal" data-bs-target="#fullscreenModal"><font-awesome-icon icon="fa-solid fa-pen-to-square"/></a>
-                    <a href="#" class="btn btn-danger btn-sm" @click="action('delete', item.id)"><font-awesome-icon icon="fa-solid fa-trash"/></a>
+                    <a href="#" class="btn btn-primary btn-sm" @click="action('edit', item.id)" data-bs-toggle="modal" data-bs-target="#fullscreenModal">e</a>
+                    <a href="#" class="btn btn-danger btn-sm" @click="action('delete', item.id)">e</a>
                 </div>
             </template>
 
