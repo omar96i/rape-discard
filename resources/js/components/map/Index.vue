@@ -38,11 +38,8 @@ export default{
         return{
             current_image : 0,
             url : '/SECUENCIA_INTRO/MAIN_COMPOSITION_00000.png',
-            loading: false
+            loading: true
         }
-    },
-    mounted(){
-        this.startEvent()
     },
     methods:{
         action(departamento){
