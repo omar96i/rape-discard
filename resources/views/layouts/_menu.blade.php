@@ -32,6 +32,14 @@
                 </a>
             </li>
         </li>
+        <li class="menu-item">
+            <li class="menu-item {{ Request::routeIs('map.index') ? 'active' : '' }}">
+                <a href="{{ route('map.index') }}" class="menu-link">
+                    <i class='menu-icon tf-icons bx bx-map-alt'></i>
+                    <div data-i18n="Analytics">Map</div>
+                </a>
+            </li>
+        </li>
     </ul>
 </aside>
 <!-- / Menu -->

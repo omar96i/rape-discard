@@ -6,6 +6,7 @@ import {createApp} from 'vue/dist/vue.esm-bundler'
 import IndexHome from './components/App.vue'
 import IndexLogin from './components/login/App.vue'
 import IndexOfertasTuristicas from './components/ofertasTuristicas/Index.vue'
+import IndexMap from './components/map/Index.vue'
 
 
 // libreries
@@ -20,6 +21,7 @@ const app = createApp({
         'login-index': IndexLogin,
         'index-home': IndexHome,
         'index-ofertas-turisticas': IndexOfertasTuristicas,
+        'index-map' : IndexMap
     },
 },);
 app.component('EasyDataTable', Vue3EasyDataTable)

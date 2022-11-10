@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store', 'store')->name('oferta.turistica.store');
         Route::post('/update/{proyect}', 'update')->name('oferta.turistica.update');
         Route::get('/delete/{proyect}', 'delete')->name('oferta.turistica.delete');
+    });
+
+    Route::prefix('map')->controller(MapController::class)->group(function () {
+        Route::get('/', 'index')->name('map.index');
     });
 
 });

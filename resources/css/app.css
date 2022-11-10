@@ -1,0 +1,51 @@
+.map{
+    width: 25%;
+    margin: auto;
+}
+
+#caldas:hover{
+    fill:#008f4c;
+    fill-opacity:0.788235
+
+}
+
+#tolima:hover{
+    fill:#532534;
+    fill-opacity:0.788235
+}
+
+#risarlada:hover{
+    fill:#d39a27;
+    fill-opacity:0.788235
+}
+
+#quindio:hover{
+    fill:#018044;
+    fill-opacity:0.788235
+}
+
+.str0 {stroke:#FEFEFE;stroke-width:49.33;stroke-miterlimit:22.9256;stroke-opacity:0.788235}
+.fil1 {fill:#FDB92E;fill-opacity:0.788235; cursor: pointer;}
+.fil0 {fill:#80384F;fill-opacity:0.788235; cursor: pointer;}
+.fil3 {fill:#28744B;fill-opacity:0.788235; cursor: pointer;}
+.fil2 {fill:#00A859;fill-opacity:0.788235; cursor: pointer;}
+
+
+.testimonial-card .card-up {
+    height: 120px;
+    overflow: hidden;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+.aqua-gradient {
+    background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+}
+
+.testimonial-card .avatar {
+    width: 120px;
+    margin-top: -60px;
+    overflow: hidden;
+    border: 5px solid #fff;
+    border-radius: 50%;
+}
