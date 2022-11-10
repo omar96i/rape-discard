@@ -41,7 +41,7 @@ export default{
             loading: false
         }
     },
-    created(){
+    mounted(){
         this.startEvent()
     },
     methods:{
@@ -61,7 +61,7 @@ export default{
                     clearInterval(interval);
                     this.loading = true
                 }
-            },50)
+            },100)
         }
     }
 }
