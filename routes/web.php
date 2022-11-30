@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
+use App\Models\Alimento;
+use App\Models\Departamento;
+use App\Models\Proyect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    Auth::logout();
-    return auth()->user();
+    $departamento = Departamento::find(1);
+
+    $alimento = Alimento::find(1);
+    $alimento->departamentos()->sync([$departamento->id => ['cantidad' => 6]]);
+    return $alimento->load('departamentos');
 });
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
@@ -33,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('ofertas-turisticas')->controller(OfertaTuristicaController::class)->group(function () {
         Route::get('/', 'index')->name('oferta.turistica.index');
         Route::get('/get', 'get')->name('oferta.turistica.get');
+        Route::post('/get/por/departamento/{departamento}/{inicio}/{fin}', 'getByDepart')->name('oferta.turistica.get.por.departamento');
         Route::get('/getData/{proyect}', 'getData')->name('oferta.turistica.get.data');
         Route::post('/store', 'store')->name('oferta.turistica.store');
         Route::post('/update/{proyect}', 'update')->name('oferta.turistica.update');

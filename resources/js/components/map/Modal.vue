@@ -22,73 +22,100 @@
                                 <tolima-svg v-if="departamento == 'tolima'"></tolima-svg>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-7" data-bs-spy="scroll">
-                            <div class="col-12 mt-2">
+                        <div class="col-12 col-sm-7">
+                            <div class="card">
+                                <div class="row p-4">
+                                    <div class="col-12 text-center">
+                                        <h5>Filtrar por:</h5>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="tipo_turismo">Tipo de turismo</label>
+                                        <input type="text" class="form-control" v-model="filtros.tipo_de_turismo">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="tipo_turismo">Estado</label>
+                                        <input type="text" class="form-control" v-model="filtros.estado">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="tipo_turismo">Nombre</label>
+                                        <input type="text" class="form-control" v-model="filtros.nombre">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="tipo_turismo">RNT</label>
+                                        <input type="text" class="form-control" v-model="filtros.rnt">
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <button class="btn btn-primary" @click="find()">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-2"  v-for="(oferta, index) in ofertas" :key="index">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="img-container">
-                                            <img src="https://talent2win.com/wp-content/uploads/2021/09/LogoDefault.png" alt="" style="position: absolute; z-index: 1; border-radius: 50%; border: solid 0.2em; height: 50px;">
+                                            <img :src="`./public/logo/${oferta.logo}`" alt="" style="position: absolute; z-index: 1; border-radius: 50%; border: solid 0.2em; height: 50px;">
                                             <div class="col-12">
-                                                <img src="https://pits-agroforestal.net/wp-content/themes/merlin/images/default-slider-image.png" alt="" style="width: 100%; height: 100px;">
+                                                <img :src="`./public/portada/${oferta.foto_portada}`" alt="" style="width: 100%; height: 150px;">
                                             </div>
                                         </div>
-                                        <h4 class="mt-2">Title</h4>
-                                        <p>descripcion..</p>
+                                        <h4 class="mt-2">{{ oferta.nombre }}</h4>
+                                        <p>{{ oferta.descripcion }}</p>
                                         <div class="text-center mb-2">
                                             <a
                                                 class="btn btn-primary me-1 btn-sm"
                                                 data-bs-toggle="collapse"
-                                                href="#collapseExample"
+                                                :href="`#collapse${oferta.id}`"
                                                 role="button"
                                                 aria-expanded="false"
-                                                aria-controls="collapseExample"
+                                                :aria-controls="`collapse${oferta.id}`"
                                                 >
                                                 Ver mas...
                                             </a>
                                         </div>
-                                        <div class="collapse" id="collapseExample">
+                                        <div class="collapse" :id="`collapse${oferta.id}`">
                                             <div class="d-grid d-sm-flex p-3 border">
                                                 <div class="col-12">
                                                     <div class="row">
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Departamento:</h6>
-                                                            Risaralda
+                                                            {{ oferta.departamento }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Tipo de turismo:</h6>
-                                                            sin definir
+                                                            {{ oferta.tipo_de_turismo }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Nombre:</h6>
-                                                            sin definir
+                                                            {{ oferta.nombre }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Estado:</h6>
-                                                            sin definir
+                                                            {{ oferta.estado }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Descripcion:</h6>
-                                                            sin definir
+                                                            {{ oferta.descripcion }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Contacto:</h6>
-                                                            sin definir
+                                                            {{ oferta.contacto }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Telefono:</h6>
-                                                            sin definir
+                                                            {{ oferta.telefono }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Website:</h6>
-                                                            sin definir
+                                                            {{ oferta.website }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>Correo:</h6>
-                                                            sin definir
+                                                            {{ oferta.correo }}
                                                         </div>
                                                         <div class="col-12 col-sm-6 mb-4">
                                                             <h6>RNT:</h6>
-                                                            sin definir
+                                                            {{ oferta.rnt }}
                                                         </div>
                                                         <div class="col-12">
                                                             <h6>Ubicacion:</h6>
@@ -103,49 +130,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-12 mt-2">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="img-container">
-                                            <img src="https://talent2win.com/wp-content/uploads/2021/09/LogoDefault.png" alt="" style="position: absolute; z-index: 1; border-radius: 50%; border: solid 0.2em; height: 50px;">
-                                            <div class="col-12">
-                                                <img src="https://pits-agroforestal.net/wp-content/themes/merlin/images/default-slider-image.png" alt="" style="width: 100%; height: 100px;">
-                                            </div>
-                                        </div>
-                                        <h4 class="mt-2">Title</h4>
-                                        <p>descripcion..</p>
-                                        <div class="text-center">
-                                            <button class="btn btn-primary btn-sm">Ver mas...</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-12 text-center mt-3" v-if="!load_more">
+                                <button class="btn btn-primary" @click="loadMore()">Cargar mas</button>
                             </div>
-                            <nav aria-label="Page navigation" class="mt-3">
-                                <ul class="pagination justify-content-center">
-                                  <li class="page-item prev">
-                                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-left"></i></a>
-                                  </li>
-                                  <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">1</a>
-                                  </li>
-                                  <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">2</a>
-                                  </li>
-                                  <li class="page-item active">
-                                    <a class="page-link" href="javascript:void(0);">3</a>
-                                  </li>
-                                  <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">4</a>
-                                  </li>
-                                  <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">5</a>
-                                  </li>
-                                  <li class="page-item next">
-                                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-right"></i></a>
-                                  </li>
-                                </ul>
-                              </nav>
+                            <div class="col-12 text-center mt-3" v-if="set_title">
+                                Actualmente no hay registros
+                            </div>
+
                         </div>
                     </div>
 
@@ -180,12 +171,71 @@ export default{
     },
     data(){
         return{
-            departamento : ''
+            departamento : '',
+            ofertas : [],
+            cantidad : 0,
+            inicio: 0,
+            fin: 2,
+            load_more : false,
+            set_title : false,
+            filtros : {
+                'tipo_de_turismo' : '',
+                'estado' : '',
+                'nombre' : '',
+                'rnt' : ''
+            }
         }
     },
     methods:{
         setData(departamento){
+            this.filtros = {
+                'tipo_de_turismo' : '',
+                'estado' : '',
+                'nombre' : '',
+                'rnt' : ''
+            }
+            this.resetData()
             this.departamento = departamento
+            this.getData()
+        },
+
+        resetData(){
+            this.set_title = false
+            this.inicio = 0
+            this.fin = 2
+            this.load_more = false
+        },
+
+        find(){
+            this.resetData()
+            this.getData()
+        },
+
+        getData(){
+            axios.post(`ofertas-turisticas/get/por/departamento/${this.departamento}/${this.inicio}/${this.fin}`, this.filtros).then(res=>{
+                console.log(res.data)
+                if(this.inicio == 0 && res.data.data.length == 0){
+                    this.load_more = true
+                    this.set_title = true
+                }
+                if(this.inicio != 0 && res.data.data.length > 0){
+                    for (let index = 0; index < res.data.data.length; index++) {
+                        this.ofertas.push(res.data.data[index])
+                    }
+                }else if(this.inicio == 0){
+                    this.ofertas = res.data.data
+                }else{
+                    this.load_more = true
+                }
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        },
+
+        loadMore(){
+            this.inicio = this.inicio+2
+            this.fin = this.fin+2
+            this.getData()
         }
     }
 }

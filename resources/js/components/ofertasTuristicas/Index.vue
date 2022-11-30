@@ -4,9 +4,9 @@
             <button type="button" class="btn btn-primary mr-4" data-bs-toggle="modal" data-bs-target="#fullscreenModal" @click="action('insert')">
                 Nuevo registro
             </button>
-            <button type="button" class="btn btn-primary" @click="info">
+            <!-- <button type="button" class="btn btn-primary" @click="info">
                 Importar Excel
-            </button>
+            </button> -->
         </div>
         <EasyDataTable class="mt-4"
             :headers="headers"
@@ -24,8 +24,8 @@
 
             <template #item-actions="item">
                 <div class="operation-wrapper">
-                    <a href="#" class="btn btn-primary btn-sm" @click="action('edit', item.id)" data-bs-toggle="modal" data-bs-target="#fullscreenModal">e</a>
-                    <a href="#" class="btn btn-danger btn-sm" @click="action('delete', item.id)">e</a>
+                    <a href="#" class="btn btn-primary btn-sm" @click="action('edit', item.id)" data-bs-toggle="modal" data-bs-target="#fullscreenModal"><i class='bx bxs-edit'></i></a>
+                    <a href="#" class="btn btn-danger btn-sm" @click="action('delete', item.id)"><i class='bx bx-message-alt-x' ></i></a>
                 </div>
             </template>
 

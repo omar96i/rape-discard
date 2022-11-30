@@ -18,14 +18,14 @@ class OfertaTuristicaController extends Controller
         if($request->file('logo')){
             $file= $request->file('logo');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $filename);
+            $file->move(public_path('public/logo'), $filename);
             $proyect->logo = $filename;
         }
 
         if($request->file('foto_portada')){
             $file= $request->file('foto_portada');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('public/img'), $filename);
+            $file->move(public_path('public/portada'), $filename);
             $proyect->foto_portada = $filename;
         }
 
@@ -66,5 +66,17 @@ class OfertaTuristicaController extends Controller
 
     public function getData(Proyect $proyect){
         return response()->json(['proyect' => $proyect]);
+    }
+
+    public function getByDepart($departamento, $inicio, $fin, Request $request){
+        $datos = Proyect::where(function ($query) use($departamento){
+            $query->where('departamento', $departamento);
+        })->where(function ($query) use($request){
+            $query->Where('nombre', 'like', '%'.$request->nombre.'%')
+            ->orWhere('tipo_de_turismo', 'like', '%'.$request->tipo_de_turismo.'%')
+            ->orWhere('estado', 'like', '%'.$request->estado.'%')
+            ->orWhere('rnt', 'like', '%'.$request->rnt.'%');
+        })->skip($inicio)->take($fin)->get();
+        return response()->json(['status' => true, 'data' => $datos]);
     }
 }

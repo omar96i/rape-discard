@@ -8,7 +8,8 @@ import IndexLogin from './components/login/App.vue'
 import IndexOfertasTuristicas from './components/ofertasTuristicas/Index.vue'
 import IndexMap from './components/map/Index.vue'
 
-
+import $ from 'jquery';
+window.$ = $;
 // libreries
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'

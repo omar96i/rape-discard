@@ -1,27 +1,53 @@
 .map{
-    width: 25%;
+    width: 35%;
     margin: auto;
 }
-
+#caldas{
+    transition: transform .1s;
+    opacity: 0.8;
+}
 #caldas:hover{
     fill:#008f4c;
-    fill-opacity:0.788235
+    fill-opacity:0.788235;
+    transform: scale(1.01);
+    transform-style: flat;
+    opacity: 1;
+}
 
+#tolima{
+    opacity: 0.8;
+    transition: transform .1s;
 }
 
 #tolima:hover{
     fill:#532534;
-    fill-opacity:0.788235
+    fill-opacity:0.788235;
+    transform: scale(1.01);
+    opacity: 1;
+}
+
+#risarlada{
+    opacity: 0.8;
+    transition: transform .1s;
 }
 
 #risarlada:hover{
-    fill:#d39a27;
-    fill-opacity:0.788235
+    fill:#ffaa00;
+    fill-opacity:0.788235;
+    transform: scale(1.01);
+    opacity: 1;
+}
+
+#quindio{
+    opacity: 0.8;
+    transition: transform .1s;
 }
 
 #quindio:hover{
     fill:#018044;
-    fill-opacity:0.788235
+    fill-opacity:0.788235;
+    transform: scale(1.01);
+    opacity: 1;
 }
 
 .str0 {stroke:#FEFEFE;stroke-width:49.33;stroke-miterlimit:22.9256;stroke-opacity:0.788235}

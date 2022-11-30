@@ -41,6 +41,8 @@ export default{
             loading: true
         }
     },
+    mounted(){
+    },
     methods:{
         action(departamento){
             this.$refs.modal_map.setData(departamento)
@@ -58,7 +60,7 @@ export default{
                     clearInterval(interval);
                     this.loading = true
                 }
-            },100)
+            },50)
         }
     }
 }
