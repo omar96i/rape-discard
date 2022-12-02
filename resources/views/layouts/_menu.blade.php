@@ -33,6 +33,14 @@
             </li>
         </li>
         <li class="menu-item">
+            <li class="menu-item {{ Request::routeIs('abastecimiento.index') ? 'active' : '' }}">
+                <a href="{{ route('abastecimiento.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="Analytics">Abastecimiento</div>
+                </a>
+            </li>
+        </li>
+        <li class="menu-item">
             <li class="menu-item {{ Request::routeIs('map.index') ? 'active' : '' }}">
                 <a href="{{ route('map.index') }}" class="menu-link">
                     <i class='menu-icon tf-icons bx bx-map-alt'></i>

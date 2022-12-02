@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Abastecimiento\AbastecimientoController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
 use App\Models\Alimento;
@@ -20,11 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    $departamento = Departamento::find(1);
-
-    $alimento = Alimento::find(1);
-    $alimento->departamentos()->sync([$departamento->id => ['cantidad' => 6]]);
-    return $alimento->load('departamentos');
+    $departamento = Departamento::find(3)->alimentos()->wherePivot('alimento_id', 39)->get();
+    return $departamento;
 });
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
@@ -48,6 +46,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('map')->controller(MapController::class)->group(function () {
         Route::get('/', 'index')->name('map.index');
+    });
+
+    Route::prefix('abastecimiento')->controller(AbastecimientoController::class)->group(function () {
+        Route::get('/', 'index')->name('abastecimiento.index');
+        Route::get('/get', 'get')->name('abastecimiento.get');
+        Route::get('/get/data/{departamento}/{alimento}', 'findDepartById')->name('abastecimiento.get.data');
+        Route::post('/store/{departamento}/{alimento}', 'store')->name('abastecimiento.store');
+        Route::post('/update/{departamento}/{alimento}', 'update')->name('abastecimiento.update');
+        Route::get('/delete/{departamento}/{alimento}', 'delete')->name('abastecimiento.delete');
+        Route::get('/get/alimentos/{categoria}', 'getAlimentos')->name('abastecimiento.get.alimentos');
     });
 
 });

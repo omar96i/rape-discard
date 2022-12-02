@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Abastecimiento;
 use App\Http\Controllers\Controller;
 use App\Models\Alimento;
 use App\Models\Departamento;
+use App\Models\Municipio;
 use Illuminate\Http\Request;
 
 class AbastecimientoController extends Controller
@@ -22,7 +23,16 @@ class AbastecimientoController extends Controller
      * @return JSON
     */
     public function get(){
-        return response()->json(['data' => Departamento::with('alimentos')->get()]);
+        return response()->json(['data' => Alimento::with('departamentos')->has('departamentos')->get()]);
+    }
+
+    /**
+     * Obtener registros x categoria
+     * @param $departamento
+     * @return JSON
+    */
+    public function getAlimentos($categoria){
+        return response()->json(['alimentos' => Alimento::where('categoria', $categoria)->get()]);
     }
 
     /**
@@ -50,8 +60,8 @@ class AbastecimientoController extends Controller
      * @param Departamento $departamento
      * @return JSON
     */
-    public function findDepartById(Departamento $departamento){
-        return response()->json(['data' => $departamento->load('alimentos')]);
+    public function findDepartById(Departamento $departamento, Alimento $alimento){
+        return response()->json(['data' => $departamento->alimentos()->wherePivot('alimento_id', $alimento->id)->get()->first()]);
     }
 
     /**
@@ -71,7 +81,11 @@ class AbastecimientoController extends Controller
      * @return JSON
     */
     public function store(Departamento $departamento, Alimento $alimento, Request $request){
-        $alimento->departamentos()->attach($departamento->id, $request->all());
+        if(count($departamento->alimentos()->wherePivot('alimento_id', $alimento->id)->get()) > 0){
+            $alimento->departamentos()->sync([$departamento->id => $request->all()]);
+        }else{
+            $alimento->departamentos()->attach($departamento->id, $request->all());
+        }
         return response()->json(['status' => true]);
     }
 
