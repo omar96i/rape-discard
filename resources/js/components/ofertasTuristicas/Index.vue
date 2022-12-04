@@ -17,7 +17,7 @@
             <template #item-logo="items">
                 <div class="customize-header">
                     <div class="avatar">
-                        <img :src="(items.logo == null) ? './assets/img/default_logo.png' : './assets/img/default_logo.png'" class="w-px-40 h-auto rounded-circle" />
+                        <img :src="(items.logo == null) ? './assets/img/default_logo.png' : `./public/logo/${items.logo}`" class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </div>
             </template>

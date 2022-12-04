@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('estado')->nullable();
             $table->string('descripcion')->nullable();
-            $table->string('logo')->default('default_logo.png');
-            $table->string('foto_portada')->nullable('default_portada.png');
+            $table->string('logo')->nullable();
+            $table->string('foto_portada')->nullable();
             $table->string('contacto')->nullable();
             $table->string('telefono')->nullable();
             $table->string('localizacion')->nullable();

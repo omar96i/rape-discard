@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call([
-        //     AlimentoSeeder::class,
-        //     DepartamentoSeeder::class,
-        //     MunicipioSeeder::class
-        // ]);
+        $this->call([
+            AlimentoSeeder::class,
+            DepartamentoSeeder::class,
+            MunicipioSeeder::class
+        ]);
         DB::table('users')->insert([
 			'email' => 'admin@gmail.com',
 			'name' => 'admin',
