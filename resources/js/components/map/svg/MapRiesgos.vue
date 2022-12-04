@@ -127,6 +127,8 @@ export default{
             if(this.data.length == 0){
                 return 'rango0'
             }
+            console.log(municipio)
+            return
             for (let index = 0; index < this.data.length; index++) {
 
 
