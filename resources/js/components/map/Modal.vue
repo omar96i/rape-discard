@@ -29,12 +29,22 @@
                                         <h5>Filtrar por:</h5>
                                     </div>
                                     <div class="col-12 col-sm-4">
-                                        <label for="tipo_turismo">Tipo de turismo</label>
-                                        <input type="text" class="form-control" v-model="filtros.tipo_de_turismo">
+                                        <label class="form-label">Tipo de turismo</label>
+                                        <select class="form-select" v-model="filtros.tipo_de_turismo">
+                                            <option value="">Selecciona un tipo de turismo</option>
+                                            <option value="turismo verde y experiencias">Turismo verde y experiencias</option>
+                                            <option value="aventura">Aventura</option>
+                                            <option value="atractivo turistico">Atractivo turistico</option>
+                                            <option value="hospedaje">Hospedaje</option>
+                                        </select>
                                     </div>
                                     <div class="col-12 col-sm-4">
-                                        <label for="tipo_turismo">Estado</label>
-                                        <input type="text" class="form-control" v-model="filtros.estado">
+                                        <label class="form-label" for="basic-default-phone">Estado</label>
+                                        <select class="form-select" v-model="filtros.estado">
+                                            <option value="">Selecciona un estado</option>
+                                            <option value="activo">Activo</option>
+                                            <option value="inactivo">Inactivo</option>
+                                        </select>
                                     </div>
                                     <div class="col-12 col-sm-4">
                                         <label for="tipo_turismo">Nombre</label>
@@ -54,9 +64,9 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="img-container">
-                                            <img :src="`./public/logo/${oferta.logo}`" alt="" style="position: absolute; z-index: 1; border-radius: 50%; border: solid 0.2em; height: 50px;">
+                                            <img :src="(oferta.logo == null) ? './assets/img/default_logo.png' : `./public/logo/${oferta.logo}`" alt="" style="position: absolute; z-index: 1; border-radius: 50%; border: solid 0.2em; height: 50px;">
                                             <div class="col-12">
-                                                <img :src="`./public/portada/${oferta.foto_portada}`" alt="" style="width: 100%; height: 150px;">
+                                                <img :src="(oferta.foto_portada == null) ? './assets/img/default_portada.png' : `./public/portada/${oferta.foto_portada}`" alt="" style="width: 100%; height: 150px;">
                                             </div>
                                         </div>
                                         <h4 class="mt-2">{{ oferta.nombre }}</h4>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Abastecimiento\AbastecimientoController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
+use App\Http\Controllers\Riesgo\MunicipioRiesgoController;
 use App\Models\Alimento;
 use App\Models\Departamento;
 use App\Models\Proyect;
@@ -37,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('ofertas-turisticas')->controller(OfertaTuristicaController::class)->group(function () {
         Route::get('/', 'index')->name('oferta.turistica.index');
         Route::get('/get', 'get')->name('oferta.turistica.get');
+        Route::get('/get/departamento/{departamento}', 'getCounts')->name('oferta.turistica.get.departamento');
         Route::post('/get/por/departamento/{departamento}/{inicio}/{fin}', 'getByDepart')->name('oferta.turistica.get.por.departamento');
         Route::get('/getData/{proyect}', 'getData')->name('oferta.turistica.get.data');
         Route::post('/store', 'store')->name('oferta.turistica.store');
@@ -56,6 +58,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/{departamento}/{alimento}', 'update')->name('abastecimiento.update');
         Route::get('/delete/{departamento}/{alimento}', 'delete')->name('abastecimiento.delete');
         Route::get('/get/alimentos/{categoria}', 'getAlimentos')->name('abastecimiento.get.alimentos');
+    });
+
+    Route::prefix('riesgo')->controller(MunicipioRiesgoController::class)->group(function () {
+        Route::get('/', 'index')->name('riesgo.index');
+        Route::get('/get', 'get')->name('riesgo.get');
+        Route::post('/get/by/date', 'getByDate')->name('riesgo.get.by.date');
+        Route::post('/get/by/municipio/{municipio}', 'getByMunicipio')->name('riesgo.get.by.municipio');
+        Route::get('/delete/{riesgo}', 'delete')->name('riesgo.delete');
+        Route::get('/get/data/{riesgo}', 'getData')->name('riesgo.get.data');
+        Route::get('/get/municipios/{departamento}', 'getMunicipioByDepartamento')->name('riesgo.get.municipios');
+        Route::post('/store', 'store')->name('riesgo.store');
+        Route::post('/update/{riesgo}', 'update')->name('riesgo.update');
     });
 
 });

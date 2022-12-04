@@ -10,7 +10,7 @@ class MunicipioRiesgo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fechas',
+        'fecha',
         'municipio_id',
         'evento',
         'muertos',

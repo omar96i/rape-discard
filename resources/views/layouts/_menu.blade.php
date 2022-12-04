@@ -41,6 +41,14 @@
             </li>
         </li>
         <li class="menu-item">
+            <li class="menu-item {{ Request::routeIs('riesgo.index') ? 'active' : '' }}">
+                <a href="{{ route('riesgo.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-detail"></i>
+                    <div data-i18n="Analytics">Riesgos</div>
+                </a>
+            </li>
+        </li>
+        <li class="menu-item">
             <li class="menu-item {{ Request::routeIs('map.index') ? 'active' : '' }}">
                 <a href="{{ route('map.index') }}" class="menu-link">
                     <i class='menu-icon tf-icons bx bx-map-alt'></i>

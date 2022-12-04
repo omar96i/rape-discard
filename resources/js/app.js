@@ -8,6 +8,7 @@ import IndexLogin from './components/login/App.vue'
 import IndexOfertasTuristicas from './components/ofertasTuristicas/Index.vue'
 import IndexMap from './components/map/Index.vue'
 import IndexAbastecimiento from './components/abastecimientos/Index.vue'
+import IndexRiesgo from './components/riesgos/Index.vue'
 
 import $ from 'jquery';
 window.$ = $;
@@ -25,6 +26,7 @@ const app = createApp({
         'index-ofertas-turisticas': IndexOfertasTuristicas,
         'index-map' : IndexMap,
         'index-abastecimiento' : IndexAbastecimiento,
+        'index-riesgo' : IndexRiesgo,
     },
 },);
 app.component('EasyDataTable', Vue3EasyDataTable)

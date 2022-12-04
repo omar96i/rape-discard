@@ -17,7 +17,7 @@
             <template #item-logo="items">
                 <div class="customize-header">
                     <div class="avatar">
-                        <img :src="(items.logo == 'default_logo.png') ? './assets/img/default_logo.png' : `./public/logo/${items.logo}`" class="w-px-40 h-auto rounded-circle" />
+                        <img :src="(items.logo == null) ? './assets/img/default_logo.png' : `./public/logo/${items.logo}`" class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </div>
             </template>
@@ -49,6 +49,7 @@
                 headers: [
                     { text: "Logo", value: "logo" },
                     { text: "Departamento", value: "departamento"},
+                    { text: "Tipo de turismo", value: "tipo_de_turismo"},
                     { text: "Nombre", value: "nombre"},
                     { text: "Estado", value: "estado"},
                     { text: "Descripcion", value: "descripcion"},
@@ -85,6 +86,7 @@
                             id : proyect.id,
                             logo : proyect.logo,
                             departamento : proyect.departamento,
+                            tipo_de_turismo : proyect.tipo_de_turismo,
                             nombre : proyect.nombre,
                             estado : proyect.estado,
                             descripcion : proyect.descripcion,

@@ -44,8 +44,13 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="basic-default-company">Tipo de turismo</label>
-                                <input type="text" class="form-control" id="basic-default-company" placeholder="Aventura" v-model="data.tipo_de_turismo">
+                                <label class="form-label">Tipo de turismo</label>
+                                <select class="form-select" v-model="data.tipo_de_turismo">
+                                    <option value="turismo verde y experiencias">Turismo verde y experiencias</option>
+                                    <option value="aventura">Aventura</option>
+                                    <option value="atractivo turistico">Atractivo turistico</option>
+                                    <option value="hospedaje">Hospedaje</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-email">Nombre</label>
@@ -55,7 +60,10 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-phone">Estado</label>
-                                <input type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="" v-model="data.estado">
+                                <select class="form-select" v-model="data.estado">
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-message">Descripcion</label>
@@ -159,11 +167,11 @@ export default{
             axios.get(`/ofertas-turisticas/getData/${id}`).then(res=>{
                 this.loading_data = false
                 this.data = res.data.proyect
-                if(this.data.logo != 'default_logo.png'){
+                if(this.data.logo != null){
                     this.img_icono = `./public/logo/${this.data.logo}`
                     this.load_image = true
                 }
-                if(this.data.foto_portada != 'default_portada.png'){
+                if(this.data.foto_portada != null){
                     this.img_portada = `./public/portada/${this.data.foto_portada}`
                     this.load_image_portada = true
                 }

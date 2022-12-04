@@ -1,5 +1,5 @@
 .map{
-    width: 35%;
+    width: 100%;
     margin: auto;
 }
 #caldas{
@@ -11,6 +11,40 @@
     fill-opacity:0.788235;
     transform: scale(1.01);
     transform-style: flat;
+    opacity: 1;
+}
+
+#MapaTurismo{
+    opacity: 0.5;
+}
+
+.municipios{
+    opacity: 0.8;
+    cursor: pointer;
+
+}
+
+.rango0{
+    fill: #d0d0d0 !important;
+}
+
+.rango1{
+    fill: #196b03 !important;
+}
+
+.rango2{
+    fill: #d5e601 !important;
+}
+
+.rango3{
+    fill: #fea400 !important;
+}
+
+.rango4{
+    fill: #ff2900 !important;
+}
+
+.municipios:hover{
     opacity: 1;
 }
 

@@ -72,11 +72,22 @@ class OfertaTuristicaController extends Controller
         $datos = Proyect::where(function ($query) use($departamento){
             $query->where('departamento', $departamento);
         })->where(function ($query) use($request){
-            $query->Where('nombre', 'like', '%'.$request->nombre.'%')
-            ->orWhere('tipo_de_turismo', 'like', '%'.$request->tipo_de_turismo.'%')
-            ->orWhere('estado', 'like', '%'.$request->estado.'%')
-            ->orWhere('rnt', 'like', '%'.$request->rnt.'%');
+            $query->where('nombre', 'like', '%'.$request->nombre.'%')
+            ->where('tipo_de_turismo', 'like', '%'.$request->tipo_de_turismo.'%')
+            ->where('estado', 'like', '%'.$request->estado.'%')
+            ->where('rnt', 'like', '%'.$request->rnt.'%');
         })->skip($inicio)->take($fin)->get();
         return response()->json(['status' => true, 'data' => $datos]);
+    }
+
+    public function getCounts($departamento){
+        $datos['turismo_verde'] = Proyect::where('tipo_de_turismo', 'turismo verde y experiencias')->where('departamento', $departamento)->count();
+        $datos['aventura'] = Proyect::where('tipo_de_turismo', 'aventura')->where('departamento', $departamento)->count();
+        $datos['atractivo_turistico'] = Proyect::where('tipo_de_turismo', 'atractivo turistico')->where('departamento', $departamento)->count();
+        $datos['hospedaje'] = Proyect::where('tipo_de_turismo', 'hospedaje')->where('departamento', $departamento)->count();
+        $datos['estado_true'] = Proyect::where('estado', 'activo')->where('departamento', $departamento)->count();
+        $datos['estado_false'] = Proyect::where('estado', 'inactivo')->where('departamento', $departamento)->count();
+
+        return response()->json(['data' => $datos]);
     }
 }
