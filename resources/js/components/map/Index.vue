@@ -1,8 +1,5 @@
 <template>
     <div class="row">
-        <div class="col-12">
-            <map-prueba></map-prueba>
-        </div>
         <div class="col-12 col-sm-5" v-if="selected_map == 'turismo'">
             <div class="map" v-if="loading">
                 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve"  version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
