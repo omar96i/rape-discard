@@ -2,17 +2,7 @@
     width: 100%;
     margin: auto;
 }
-#caldas{
-    transition: transform .1s;
-    opacity: 0.8;
-}
-#caldas:hover{
-    fill:#008f4c;
-    fill-opacity:0.788235;
-    transform: scale(1.01);
-    transform-style: flat;
-    opacity: 1;
-}
+
 
 #MapaTurismo{
     opacity: 0.5;
@@ -49,40 +39,39 @@
     opacity: 1;
 }
 
-#tolima{
-    opacity: 0.8;
-    transition: transform .1s;
+#CALDAS{
+    cursor: pointer;
+    opacity: 0;
+}
+#CALDAS:hover{
+    opacity: 0.5;
 }
 
-#tolima:hover{
-    fill:#532534;
-    fill-opacity:0.788235;
-    transform: scale(1.01);
-    opacity: 1;
+#TOLIMA{
+    cursor: pointer;
+    opacity: 0;
 }
 
-#risarlada{
-    opacity: 0.8;
-    transition: transform .1s;
+#TOLIMA:hover{
+    opacity: 0.5;
 }
 
-#risarlada:hover{
-    fill:#ffaa00;
-    fill-opacity:0.788235;
-    transform: scale(1.01);
-    opacity: 1;
+#RISARALDA{
+    cursor: pointer;
+    opacity: 0;
 }
 
-#quindio{
-    opacity: 0.8;
-    transition: transform .1s;
+#RISARALDA:hover{
+    opacity: 0.5;
 }
 
-#quindio:hover{
-    fill:#018044;
-    fill-opacity:0.788235;
-    transform: scale(1.01);
-    opacity: 1;
+#QUINDIO{
+    cursor: pointer;
+    opacity: 0;
+}
+
+#QUINDIO:hover{
+    opacity: 0.5;
 }
 
 .str0 {stroke:#FEFEFE;stroke-width:49.33;stroke-miterlimit:22.9256;stroke-opacity:0.788235}
@@ -110,3 +99,22 @@
     border: 5px solid #fff;
     border-radius: 50%;
 }
+
+
+.image-background-services {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -2;
+}
+
+
+.background-services {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+}
+
+
+.cls-1{fill:#28744b;}.cls-1,.cls-4{stroke:#fefefe;}.cls-1,.cls-2,.cls-3,.cls-4{stroke-miterlimit:10;}.cls-2{fill:#fdb92e;}.cls-2,.cls-3{stroke:#fffff3;}.cls-3{fill:#80384f;}.cls-4{fill:#00a859;}
