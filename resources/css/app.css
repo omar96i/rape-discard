@@ -21,11 +21,12 @@
 .municipios{
     opacity: 0.8;
     cursor: pointer;
+    fill: #d0d0d0 !important;
 
 }
 
 .rango0{
-    fill: #d0d0d0 !important;
+    fill: #d0d0d0;
 }
 
 .rango1{
