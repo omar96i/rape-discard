@@ -109,13 +109,16 @@
 </template>
 
 <script>
+import _ from 'lodash';
 export default{
     props:['datos'],
     data(){
         return{
             data : this.datos,
             select : '',
-            texto : ''
+            texto : '',
+            municipio : '',
+            aux :false
         }
     },
     methods:{
@@ -123,34 +126,31 @@ export default{
             this.$parent.getDataMunicipio(municipio)
         },
         getClass(municipio){
+            this.aux = false
+            this.municipio = municipio
             this.texto = ''
             if(this.data.length == 0){
                 return 'rango0'
             }
-            console.log(municipio)
-            return
-            for (let index = 0; index < this.data.length; index++) {
-
-
-                if(this.data[index].municipio.nombre == municipio){
+            this.data.forEach(municipio => {
+                if(municipio.municipio.nombre == this.municipio){
                     var numero = 0
-
-                    numero = this.data[index].muertos + numero
-                    numero = this.data[index].heridos + numero
-                    numero = this.data[index].desaparecidos + numero
-                    numero = this.data[index].personas + numero
-                    numero = this.data[index].familias + numero
-                    numero = this.data[index].viv_destru + numero
-                    numero = this.data[index].viv_aver + numero
-                    numero = this.data[index].vias + numero
-                    numero = this.data[index].ptes_vehic + numero
-                    numero = this.data[index].ptes_peat + numero
-                    numero = this.data[index].acued + numero
-                    numero = this.data[index].alcant + numero
-                    numero = this.data[index].c_salud + numero
-                    numero = this.data[index].c_educat + numero
-                    numero = this.data[index].c_comunit + numero
-                    numero = this.data[index].hectareas + numero
+                    numero = municipio.muertos + numero
+                    numero = municipio.heridos + numero
+                    numero = municipio.desaparecidos + numero
+                    numero = municipio.personas + numero
+                    numero = municipio.familias + numero
+                    numero = municipio.viv_destru + numero
+                    numero = municipio.viv_aver + numero
+                    numero = municipio.vias + numero
+                    numero = municipio.ptes_vehic + numero
+                    numero = municipio.ptes_peat + numero
+                    numero = municipio.acued + numero
+                    numero = municipio.alcant + numero
+                    numero = municipio.c_salud + numero
+                    numero = municipio.c_educat + numero
+                    numero = municipio.c_comunit + numero
+                    numero = municipio.hectareas + numero
                     if(numero >= 0 && numero <= 4499){
                         this.texto = 'rango1'
                     }
@@ -163,13 +163,11 @@ export default{
                     if(numero >= 13500){
                         this.texto = 'rango4'
                     }
-                    break;
-                }else{
+                    this.aux = true
+                }else if(this.aux != true && municipio.municipio.nombre != this.municipio){
                     this.texto = 'rango0'
                 }
-
-            }
-
+            });
             return this.texto
         }
     }
