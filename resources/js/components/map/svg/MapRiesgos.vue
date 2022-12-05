@@ -132,42 +132,41 @@ export default{
             if(this.data.length == 0){
                 return 'rango0'
             }
-            this.data.forEach(municipio => {
-                if(municipio.municipio.nombre == this.municipio){
-                    var numero = 0
-                    numero = municipio.muertos + numero
-                    numero = municipio.heridos + numero
-                    numero = municipio.desaparecidos + numero
-                    numero = municipio.personas + numero
-                    numero = municipio.familias + numero
-                    numero = municipio.viv_destru + numero
-                    numero = municipio.viv_aver + numero
-                    numero = municipio.vias + numero
-                    numero = municipio.ptes_vehic + numero
-                    numero = municipio.ptes_peat + numero
-                    numero = municipio.acued + numero
-                    numero = municipio.alcant + numero
-                    numero = municipio.c_salud + numero
-                    numero = municipio.c_educat + numero
-                    numero = municipio.c_comunit + numero
-                    numero = municipio.hectareas + numero
-                    if(numero >= 0 && numero <= 4499){
-                        this.texto = 'rango1'
-                    }
-                    if(numero >= 4500 && numero <= 8999){
-                        this.texto = 'rango2'
-                    }
-                    if(numero >= 9000 && numero <= 13499){
-                        this.texto = 'rango3'
-                    }
-                    if(numero >= 13500){
-                        this.texto = 'rango4'
-                    }
-                    this.aux = true
-                }else if(this.aux != true && municipio.municipio.nombre != this.municipio){
-                    this.texto = 'rango0'
+            var datos = this.data.find(element => element.municipio.nombre == municipio)
+            if(datos == undefined){
+                this.texto = 'rango0'
+            }else{
+                var numero = 0
+                numero = datos.muertos + numero
+                numero = datos.heridos + numero
+                numero = datos.desaparecidos + numero
+                numero = datos.personas + numero
+                numero = datos.familias + numero
+                numero = datos.viv_destru + numero
+                numero = datos.viv_aver + numero
+                numero = datos.vias + numero
+                numero = datos.ptes_vehic + numero
+                numero = datos.ptes_peat + numero
+                numero = datos.acued + numero
+                numero = datos.alcant + numero
+                numero = datos.c_salud + numero
+                numero = datos.c_educat + numero
+                numero = datos.c_comunit + numero
+                numero = datos.hectareas + numero
+                if(numero >= 0 && numero <= 4499){
+                    this.texto = 'rango1'
                 }
-            });
+                if(numero >= 4500 && numero <= 8999){
+                    this.texto = 'rango2'
+                }
+                if(numero >= 9000 && numero <= 13499){
+                    this.texto = 'rango3'
+                }
+                if(numero >= 13500){
+                    this.texto = 'rango4'
+                }
+            }
+
             return this.texto
         }
     }
