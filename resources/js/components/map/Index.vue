@@ -102,7 +102,7 @@
                     <spinner-view></spinner-view>
                 </div>
             </div>
-            <div class="card mt-4" v-if="showFiltros == true">
+            <div class="card mt-4" v-if="showFiltros == true && selected_map == 'abastecimiento'">
                 <div class="card-body" v-if="!loading_data">
                     <div class="col-12 mb-2">
                         <label for="categoria">Categoria</label>
@@ -131,6 +131,7 @@
                     </div>
 
                     <div class="row" v-if="load_chart_abastecimiento">
+                        <div class="col-12 text-center text-capitalize"><h5>{{selected_departamento}}</h5></div>
                         <div class="col-12">
                             <DoughnutChart :chartData="chartDataAbastecimiento" :options="optionsAbastecimiento"/>
                         </div>
@@ -141,6 +142,9 @@
                 <div class="card-body text-center" v-else>
                     <spinner-view></spinner-view>
                 </div>
+            </div>
+            <div class="card mt-4" v-if="!showFiltros && selected_map == 'abastecimiento'">
+                <div class="col-12 text-center"><h4>Sin datos a analizar</h4></div>
             </div>
         </div>
     </div>
@@ -193,7 +197,7 @@ export default{
                 datasets: [
                     {
                         data: [],
-                        backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+                        backgroundColor: ['#FDB92E', '#80384F', '#28744B', '#00A859'],
                     },
                 ],
             },
@@ -214,7 +218,7 @@ export default{
                 datasets: [
                     {
                         data: [],
-                        backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+                        backgroundColor: ['#FDB92E', '#80384F', '#28744B', '#00A859'],
                     },
                 ],
             },
