@@ -74,6 +74,42 @@
     opacity: 0.5;
 }
 
+#CALDAS_2{
+    cursor: pointer;
+    opacity: 0.7;
+}
+#CALDAS_2:hover{
+    opacity: 1;
+}
+
+#TOLIMA_2{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#TOLIMA_2:hover{
+    opacity: 1;
+}
+
+#RISARALDA_2{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#RISARALDA_2:hover{
+    opacity: 1;
+}
+
+#QUINDIO_2{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#QUINDIO_2:hover{
+    opacity: 1;
+}
+
+
 .str0 {stroke:#FEFEFE;stroke-width:49.33;stroke-miterlimit:22.9256;stroke-opacity:0.788235}
 .fil1 {fill:#FDB92E;fill-opacity:0.788235; cursor: pointer;}
 .fil0 {fill:#80384F;fill-opacity:0.788235; cursor: pointer;}

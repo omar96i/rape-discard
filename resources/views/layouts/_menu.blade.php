@@ -17,7 +17,7 @@
         <li class="menu-item {{ Request::routeIs('home') ? 'active' : '' }}">
             <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Inicio</div>
             </a>
         </li>
 
@@ -52,7 +52,7 @@
             <li class="menu-item {{ Request::routeIs('map.index') ? 'active' : '' }}">
                 <a href="{{ route('map.index') }}" class="menu-link">
                     <i class='menu-icon tf-icons bx bx-map-alt'></i>
-                    <div data-i18n="Analytics">Map</div>
+                    <div data-i18n="Analytics">Mapas</div>
                 </a>
             </li>
         </li>

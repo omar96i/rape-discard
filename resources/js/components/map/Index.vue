@@ -15,6 +15,10 @@
             </div>
         </div>
 
+         <div class="col-12 col-sm-5" v-if="selected_map == 'abastecimiento'">
+            <map-abastecimiento></map-abastecimiento>
+        </div>
+
         <div :class="['col-12', {'col-sm-7' : selected_map != ''}]">
             <div class="card">
                 <div class="card-body">
@@ -81,101 +85,59 @@
                     <div class="col-12 mb-4">
                         <button class="btn btn-primary" @click="getDatos()">Buscar datos</button>
                     </div>
-                    <div class="row" v-if="selected_day.inicio != '' && selected_day.fin != ''">
+                    <div class="row" v-if="load_chart">
                         <div class="col-12 col-sm-6">
-                            <h6>Departamento</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.municipio.departamento.nombre }}</p>
+                            <h6>Departamento: {{this.data_riesgo_municipio.municipio.departamento.nombre}}</h6>
                         </div>
                         <div class="col-12 col-sm-6">
-                            <h6>Municipio</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.municipio.nombre }}</p>
+                            <h6>Municipio: {{this.data_riesgo_municipio.municipio.nombre}}</h6>
                         </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Muertos</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.muertos }}</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Heridos</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.heridos }}</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Desaparecidos</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.desaparecidos }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Personas</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.personas }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Familias</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.familias }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Viv.destru</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.viv_destru }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Viv.aver</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.viv_aver }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Vias</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.vias }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Ptes.vehic</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.ptes_vehic }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Ptes.peat</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.ptes_peat }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Acued</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.acued }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Alcantarillado</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.alcant }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>C.salud</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.c_salud }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>C.educat</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.c_educat }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>C.comunit</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.c_comunit }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Hectareas</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.hectareas }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h6>Otros</h6>
-                            <p>{{ (data_riesgo_municipio == null) ? 'Sin datos' : data_riesgo_municipio.otros }}</p>
-
-                        </div>
-
+                        <BarChart :chartData="chartData" :options="options" />
+                    </div>
+                    <div class="col-12 text-center" v-else>
+                        <h4>Sin datos seleccionados</h4>
                     </div>
                 </div>
+                <div class="card-body text-center" v-else>
+                    <spinner-view></spinner-view>
+                </div>
+            </div>
+            <div class="card mt-4" v-if="showFiltros == true">
+                <div class="card-body" v-if="!loading_data">
+                    <div class="col-12 mb-2">
+                        <label for="categoria">Categoria</label>
+                        <select class="form-select" id="categoria" v-model="filtros_abastecimiento.categoria" @change="getAlimentos()">
+                            <option value="">Selecciona una categoria</option>
+                            <option value="Verduras y hortalizas">Verduras y hortalizas</option>
+                            <option value="Frutas Frescas">Frutas Frescas</option>
+                            <option value="Tubérculos, raíces y plátanos">Tubérculos, raíces y plátanos</option>
+                            <option value="Granos y Cereales">Granos y Cereales</option>
+                            <option value="Huevos y Lácteos">Huevos y Lácteos</option>
+                            <option value="Carnes">Carnes</option>
+                            <option value="Pescados">Pescados</option>
+                            <option value="Productos procesados">Productos procesados</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="fecha">Alimentos</label>
+                        <select class="form-select" id="categoria" v-model="filtros_abastecimiento.nombre">
+                            <option value="">Selecciona un alimento</option>
+                            <option v-for="(alimento, index) in options_alimentos" :key="index" :value="alimento.nombre">{{ alimento.nombre }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <button class="btn btn-primary" @click="getByFiltros()">Buscar datos</button>
+                    </div>
+
+                    <div class="row" v-if="load_chart_abastecimiento">
+                        <div class="col-12">
+                            <DoughnutChart :chartData="chartDataAbastecimiento" :options="optionsAbastecimiento"/>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="card-body text-center" v-else>
                     <spinner-view></spinner-view>
                 </div>
@@ -193,13 +155,23 @@ import Spinner from "../Spinner.vue"
 import MapRiesgos from "./svg/MapRiesgos.vue"
 import MapEstilos from "./svg/MapEstilos.vue"
 import MapColores from "./svg/MapColores.vue"
+import MapAbastecimiento from "./svg/MapAbastecimiento.vue"
+import {DoughnutController} from 'chart.js';
+import { DoughnutChart } from 'vue-chart-3';
+import { BarChart } from 'vue-chart-3';
+import { Chart, BarController, BarElement,ArcElement,Tooltip, CategoryScale, LinearScale } from 'chart.js';
+Chart.register(BarController, DoughnutController, ArcElement, Tooltip,BarElement, CategoryScale, LinearScale);
+
 export default{
     components:{
         'map-modal' : Modal,
         'spinner-view' : Spinner,
         'map-riesgos' : MapRiesgos,
         'map-estilos' : MapEstilos,
-        'map-colores' : MapColores
+        'map-colores' : MapColores,
+        BarChart,
+        DoughnutChart,
+        'map-abastecimiento' : MapAbastecimiento
     },
     data(){
         return{
@@ -215,7 +187,59 @@ export default{
             },
             data_riesgos : {},
             data_riesgo_municipio : null,
-            load_map : false
+            load_map : false,
+            chartData: {
+                labels: ['Muertos', 'Heridos', 'Desaparecidos', 'Personas', 'Familias', 'Viv.destru', 'Viv.aver', 'Vias', 'Ptes.vehic', 'Ptes.peat', 'Acued', 'Alcant', 'C.Salud', 'C.Comunit', 'Hectareas'],
+                datasets: [
+                    {
+                        data: [],
+                        backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+                    },
+                ],
+            },
+            options : {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Municipios Riesgos',
+                    },
+                },
+            },
+            chartDataAbastecimiento: {
+                labels: [],
+                datasets: [
+                    {
+                        data: [],
+                        backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+                    },
+                ],
+            },
+            optionsAbastecimiento: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Departamento Abastecimientos',
+                    },
+                },
+            },
+            load_chart : false,
+            filtros_abastecimiento : {
+                'categoria' : '',
+                'nombre' : ''
+            },
+            options_alimentos : [],
+            alimentos : {},
+            load_chart_abastecimiento : false,
+            showFiltros : false,
+            noData : true
         }
     },
     methods:{
@@ -233,9 +257,75 @@ export default{
         openModal(){
             this.$refs.modal_map.setData(this.selected_departamento)
         },
+        getAbastecimientoData(departamento){
+            this.filtros_abastecimiento.categoria = ''
+            this.filtros_abastecimiento.nombre = ''
+            this.showFiltros = false
+            this.load_chart_abastecimiento = false
+            this.selected_departamento = departamento
+            axios.get(`/abastecimiento/get/data/by/departamento/${this.selected_departamento}`).then(res=>{
+                this.chartDataAbastecimiento.datasets[0].data = []
+                this.chartDataAbastecimiento.labels = []
+                this.alimentos = res.data.departamento.alimentos
+                this.alimentos.forEach(alimento => {
+                    this.chartDataAbastecimiento.labels.push(alimento.nombre)
+                    this.chartDataAbastecimiento.datasets[0].data.push(alimento.pivot.cantidad)
+                });
+                if(this.alimentos.length > 0){
+                    this.showFiltros = true
+                    this.load_chart_abastecimiento = true
+                    this.noData = false
+                }else{
+                    this.noData = true
+                }
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        },
         getDataMunicipio(municipio){
+            this.load_chart = false
             axios.post(`/riesgo/get/by/municipio/${municipio}`, this.selected_day).then(res=>{
                 this.data_riesgo_municipio = res.data.data
+                this.chartData.datasets[0].data = []
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.muertos)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.heridos)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.desaparecidos)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.personas)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.familias)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.viv_destru)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.viv_aver)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.vias)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.ptes_vehic)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.ptes_peat)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.acued)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.alcant)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.c_salud)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.c_comunit)
+                this.chartData.datasets[0].data.push(this.data_riesgo_municipio.hectareas)
+                this.load_chart = true
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        },
+        getAlimentos(){
+            axios.post(`/abastecimiento/get/data/by/categoria`, this.filtros_abastecimiento).then(res=>{
+                this.options_alimentos = res.data.alimentos
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        },
+        getByFiltros(){
+            this.load_chart_abastecimiento = false
+            axios.post(`/abastecimiento/get/data/by/filtros/${this.selected_departamento}`, this.filtros_abastecimiento).then(res=>{
+                this.chartDataAbastecimiento.datasets[0].data = []
+                this.chartDataAbastecimiento.labels = []
+                if(res.data.alimento.length > 0){
+                    for (let index = 0; index < res.data.alimento.length; index++) {
+                        this.chartDataAbastecimiento.datasets[0].data.push(res.data.cantidad[index].pivot.cantidad)
+                        this.chartDataAbastecimiento.labels.push(res.data.alimento[index].nombre)
+                    }
+                    this.load_chart_abastecimiento = true
+                }
             }).catch(error=>{
                 console.log(error.response)
             })

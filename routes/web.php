@@ -53,6 +53,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('abastecimiento')->controller(AbastecimientoController::class)->group(function () {
         Route::get('/', 'index')->name('abastecimiento.index');
         Route::get('/get', 'get')->name('abastecimiento.get');
+        Route::get('/get/data/by/departamento/{departamento}', 'getByDepartamento')->name('abastecimiento.get');
+        Route::post('/get/data/by/categoria', 'getByCategoria')->name('abastecimiento.get.data.by.categoria');
+        Route::post('/get/data/by/filtros/{departamento}', 'getByFiltros')->name('abastecimiento.get.data.by.filtros');
         Route::get('/get/data/{departamento}/{alimento}', 'findDepartById')->name('abastecimiento.get.data');
         Route::post('/store/{departamento}/{alimento}', 'store')->name('abastecimiento.store');
         Route::post('/update/{departamento}/{alimento}', 'update')->name('abastecimiento.update');

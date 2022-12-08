@@ -111,4 +111,40 @@ class AbastecimientoController extends Controller
         $alimento->departamentos()->detach($departamento->id);
         return response()->json(['status' => true]);
     }
+
+    public function getByCategoria(Request $request){
+        $alimentos = Alimento::where('categoria', $request->categoria)->get()->toArray();
+        return response()->json(['alimentos' => $alimentos]);
+    }
+
+    public function getByDepartamento($departamento){
+        $alimentos = Departamento::with('alimentos')->where('nombre', $departamento)->get()->first();
+        return response()->json(['departamento' => $alimentos]);
+    }
+
+    public function getByFiltros($departamento, Request $request){
+        if($departamento == 'caldas'){
+            $departamento = 4;
+        }else if($departamento == 'risaralda'){
+            $departamento = 1;
+        }else if($departamento == 'quindio'){
+            $departamento = 2;
+        }else if($departamento == 'tolima'){
+            $departamento = 3;
+        }
+        $alimentos_2 = [];
+        $alimentos_3 = [];
+        $alimentos = Alimento::where('nombre', 'like', '%'.$request->nombre.'%')->where('categoria', 'like', '%'.$request->categoria.'%')->get();
+        if(count($alimentos) > 0){
+            foreach ($alimentos as $key => $alimento) {
+                $aux = $alimento->departamentos()->where('departamento_id', $departamento)->get()->first();
+                if(!is_null($aux)){
+                    array_push($alimentos_2, $aux);
+                    array_push($alimentos_3, $alimento);
+                }
+
+            }
+        }
+        return response()->json(['cantidad' => $alimentos_2, 'alimento' => $alimentos_3]);
+    }
 }

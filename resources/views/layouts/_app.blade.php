@@ -14,9 +14,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard - @yield('title')</title>
-
-    <meta name="description" content="" />
+    <title>Rap Pereira - @yield('title')</title>
 
     @include('layouts._head')
     @yield('css')

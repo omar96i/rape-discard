@@ -12,7 +12,7 @@
         <div class="row row-bordered g-0">
         <!-- Title -->
         <div class="col-md-12">
-            <h5 class="card-header m-0 me-2 pb-3">Home</h5>
+            <h5 class="card-header m-0 me-2 pb-3">Inicio</h5>
         </div>
         <div class="col-md-12">
             <div class="card-body" id="app">

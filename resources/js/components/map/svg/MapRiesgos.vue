@@ -244,9 +244,6 @@ export default{
                     numero = this.data[j].c_educat + numero
                     numero = this.data[j].c_comunit + numero
                     numero = this.data[j].hectareas + numero
-                    console.log(numero)
-                    console.log(this.data[j].municipio.nombre)
-                    console.log(this.municipios[index].municipio)
                     if(numero >= 0 && numero <= 4499){
                         this.municipios[index].municipio = 'rango1'
                     }
