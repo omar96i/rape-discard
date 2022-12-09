@@ -17,7 +17,7 @@
             <template #item-logo="items">
                 <div class="customize-header">
                     <div class="avatar">
-                        <img :src="(items.logo == null) ? ((items.tipo_de_turismo == 'aventura')? './assets/default_icons/aventura.svg' : ((items.tipo_de_turismo == 'turismo verde y experiencias')? './assets/default_icons/turismo_verde.svg' : ((items.tipo_de_turismo == 'atractivo turistico')? './assets/default_icons/atractivo_turistico':((items.tipo_de_turismo == 'hospedaje')? './assets/default_icons/hospedaje.svg':'')))) : `./public/logo/${items.logo}`" class="w-px-40 h-auto rounded-circle" />
+                        <img :src="(items.logo == null) ? ((items.tipo_de_turismo == 'aventura')? './assets/default_icons/aventura.svg' : ((items.tipo_de_turismo == 'turismo verde y experiencias')? './assets/default_icons/turismo_verde.svg' : ((items.tipo_de_turismo == 'atractivo turistico')? './assets/default_icons/atractivo_turistico.svg':((items.tipo_de_turismo == 'hospedaje')? './assets/default_icons/hospedaje.svg':'')))) : `./public/logo/${items.logo}`" class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </div>
             </template>
