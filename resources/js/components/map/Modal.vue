@@ -256,6 +256,8 @@ export default{
                 'nombre' : '',
                 'rnt' : ''
             }
+            this.markers = []
+            this.markers_info = []
             this.resetData()
             this.departamento = departamento
             this.getData()
