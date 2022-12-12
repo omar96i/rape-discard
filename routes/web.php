@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    $departamento = Departamento::find(3)->alimentos()->wherePivot('alimento_id', 39)->get();
-    return $departamento;
+    return view('pruebas');
 });
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');

@@ -12,6 +12,7 @@
                     aria-label="Close"
                     ></button>
                 </div>
+
                 <div class="modal-body">
                     <div class="card-body row">
                         <div class="col-12 mb-3">
@@ -25,10 +26,6 @@
                         <div class="col-12 col-sm-6">
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label class="form-label btn btn-primary" for="file">Selecciona una imagen para el Logo</label>
-                                    <input type="file" @change="onLogoChange" id="file" style="display:none">
-                                </div>
-                                <div class="mb-3 col">
                                     <label class="form-label btn btn-primary" for="file_portada">Selecciona una imagen para la portada</label>
                                     <input type="file" @change="onPortadaChange" id="file_portada" style="display:none">
                                 </div>
@@ -36,7 +33,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-fullname">Departamento</label>
-                                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" v-model="data.departamento">
+                                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" v-model="data.departamento" required>
                                     <option value="tolima">TOLIMA</option>
                                     <option value="caldas">CALDAS</option>
                                     <option value="quindio">QUINDIO</option>
@@ -45,17 +42,18 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Tipo de turismo</label>
-                                <select class="form-select" v-model="data.tipo_de_turismo">
+                                <select class="form-select" v-model="data.tipo_de_turismo" required>
                                     <option value="turismo verde y experiencias">Turismo verde y experiencias</option>
                                     <option value="aventura">Aventura</option>
                                     <option value="atractivo turistico">Atractivo turistico</option>
                                     <option value="hospedaje">Hospedaje</option>
+                                    <option value="agencias de viajes">Agencias de viajes</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-email">Nombre</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="text" id="basic-default-email" class="form-control" placeholder="" aria-label="" aria-describedby="basic-default-email2" v-model="data.nombre">
+                                    <input type="text" class="form-control" v-model="data.nombre" required>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -73,6 +71,10 @@
                         </div>
 
                         <div class="col-12 col-sm-6">
+                            <div class="mb-3 col">
+                                <label class="form-label btn btn-primary btn-block" for="file">Selecciona una imagen para el Logo</label>
+                                <input type="file" @change="onLogoChange" id="file" style="display:none">
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-fullname">Contacto</label>
                                 <input type="text" class="form-control" id="basic-default-fullname" v-model="data.contacto">
@@ -80,12 +82,6 @@
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-company">Telefono</label>
                                 <input type="text" class="form-control" id="basic-default-company" v-model="data.telefono">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="basic-default-email">Georreferenciación</label>
-                                <div class="input-group input-group-merge">
-                                    <input type="text" id="basic-default-email" class="form-control" v-model="data.localizacion">
-                                </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-phone">Website</label>
@@ -103,6 +99,12 @@
                                 <input type="text" id="basic-default-phone" class="form-control phone-mask" v-model="data.rnt">
                             </div>
                         </div>
+                        <div class="col-12" v-if="selected_map">
+                            <h5>Selecciona la localizacion</h5>
+                            <GoogleMap api-key="AIzaSyArbGiMxuFAfhAEgh0Gsp3Ap3Ezr9a2S5Q" style="width: 100%; height: 500px" :center="center" :zoom="zoom" @click="clicked">
+                                <Marker :options="{ position: markers }" />
+                            </GoogleMap>
+                        </div>
 
                     </div>
                 </div>
@@ -110,7 +112,7 @@
                     <button type="button" id="cierrame" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Close
                     </button>
-                    <button type="button" class="btn btn-primary" @click="action">{{ (tipo == 'insert') ?  'Agregar' : 'Editar' }}</button>
+                    <button type="submit" class="btn btn-primary" @click="action">{{ (tipo == 'insert') ?  'Agregar' : 'Editar' }}</button>
                 </div>
                 <div class="modal-footer" v-else>
                     <spinner-view></spinner-view>
@@ -130,11 +132,14 @@
 <script>
 import axios from 'axios';
 import Spinner from '../Spinner.vue'
+import { GoogleMap, Marker } from "vue3-google-map";
 
 
 export default{
     components:{
-        'spinner-view' : Spinner
+        'spinner-view' : Spinner,
+        GoogleMap,
+        Marker,
     },
     data(){
         return{
@@ -147,13 +152,20 @@ export default{
             data:{},
             tipo: 'insert',
             loading: false,
-            loading_data : false
+            loading_data : false,
+            markers : { lat : null , lng : null},
+            center : {lat: 4.338292532471442, lng: -74.11473565004208},
+            zoom : 5,
+            selected_map : true
         }
     },
     methods:{
         setData(tipo, id){
             if(tipo == 'edit'){
                 this.loading_data = true
+                this.markers = { lat : null , lng : null}
+                this.center = {lat: 4.338292532471442, lng: -74.11473565004208}
+                this.zoom = 5
                 this.getData(id)
                 this.tipo = tipo
             }
@@ -165,7 +177,6 @@ export default{
         },
         getData(id){
             axios.get(`/ofertas-turisticas/getData/${id}`).then(res=>{
-                this.loading_data = false
                 this.data = res.data.proyect
                 if(this.data.logo != null){
                     this.img_icono = `./public/logo/${this.data.logo}`
@@ -175,9 +186,28 @@ export default{
                     this.img_portada = `./public/portada/${this.data.foto_portada}`
                     this.load_image_portada = true
                 }
+                if(res.data.proyect.lat != null && res.data.proyect.lng != null){
+                    this.markers.lat = res.data.proyect.lat
+                    this.markers.lng = res.data.proyect.lng
+                    this.center.lat = res.data.proyect.lat
+                    this.center.lng = res.data.proyect.lng
+                    this.zoom = 15
+                }
+                this.loading_data = false
             }).catch(res=>{
                 console.log(res.response)
             })
+        },
+        clicked(event){
+            this.selected_map = false
+            this.markers.lat = event.latLng.lat()
+            this.markers.lng = event.latLng.lng()
+            this.center.lat = event.latLng.lat()
+            this.center.lng = event.latLng.lng()
+            this.zoom = 15
+            setTimeout(()=>{
+                this.selected_map = true
+            },200)
         },
         resetData(){
             this.data = {}
@@ -186,8 +216,14 @@ export default{
             this.load_image = false,
             this.load_image_portada = false
             this.file_icono = ''
-            this.loading_data = false
+
             this.loading = false
+            this.markers = { lat : null , lng : null}
+            this.center = {lat: 4.338292532471442, lng: -74.11473565004208}
+            this.zoom = 5
+            setTimeout(() => {
+                this.loading_data = false
+            }, 200);
         },
         onLogoChange(e){
             let files = e.target.files[0]
@@ -220,11 +256,14 @@ export default{
             data.append("descripcion", this.data.descripcion)
             data.append("contacto", this.data.contacto)
             data.append("telefono", this.data.telefono)
-            data.append("localizacion", this.data.localizacion)
             data.append("website", this.data.website)
             data.append("correo", this.data.correo)
             data.append("rnt", this.data.rnt)
 
+            if(this.markers.lat != null && this.markers.lng){
+                data.append("lat", this.markers.lat)
+                data.append("lng", this.markers.lng)
+            }
             if(this.file_icono != ''){
                 data.append("logo", this.file_icono, this.file_icono.name)
             }

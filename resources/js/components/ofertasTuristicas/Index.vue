@@ -89,13 +89,13 @@
                             tipo_de_turismo : proyect.tipo_de_turismo,
                             nombre : proyect.nombre,
                             estado : proyect.estado,
-                            descripcion : proyect.descripcion,
-                            contacto : proyect.contacto,
-                            telefono : proyect.telefono,
-                            localizacion : proyect.localizacion,
-                            website : proyect.website,
-                            correo : proyect.correo,
-                            rnt : proyect.rnt,
+                            descripcion : (proyect.descripcion == 'undefined') ? 'sin definir' : proyect.descripcion,
+                            contacto : (proyect.contacto == 'undefined') ? 'sin definir' : proyect.contacto,
+                            telefono : (proyect.telefono == 'undefined') ? 'sin definir' : proyect.telefono,
+                            localizacion : (proyect.lat == null) ? 'sin definir' : proyect.lat+','+proyect.lng,
+                            website : (proyect.website == 'undefined') ? 'sin definir' : proyect.website,
+                            correo : (proyect.correo == 'undefined') ? 'sin definir' : proyect.correo,
+                            rnt : (proyect.rnt == 'undefined') ? 'sin definir' : proyect.rnt,
                             created_at : proyect.created_at
 
                         })

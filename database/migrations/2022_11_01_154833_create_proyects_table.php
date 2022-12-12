@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('foto_portada')->nullable();
             $table->string('contacto')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('localizacion')->nullable();
+            $table->double('lat')->nullable();
+            $table->double('lng')->nullable();
             $table->string('website')->nullable();
             $table->string('correo')->nullable();
             $table->string('rnt')->nullable();

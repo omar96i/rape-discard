@@ -1,7 +1,6 @@
 import './bootstrap';
 
 import {createApp} from 'vue/dist/vue.esm-bundler'
-
 // components
 import IndexHome from './components/App.vue'
 import IndexLogin from './components/login/App.vue'
@@ -9,6 +8,7 @@ import IndexOfertasTuristicas from './components/ofertasTuristicas/Index.vue'
 import IndexMap from './components/map/Index.vue'
 import IndexAbastecimiento from './components/abastecimientos/Index.vue'
 import IndexRiesgo from './components/riesgos/Index.vue'
+import IndexSegundo from './components/Segundo.vue'
 
 import $ from 'jquery';
 window.$ = $;
@@ -27,6 +27,7 @@ const app = createApp({
         'index-map' : IndexMap,
         'index-abastecimiento' : IndexAbastecimiento,
         'index-riesgo' : IndexRiesgo,
+        'index-segundo' : IndexSegundo,
     },
 },);
 app.component('EasyDataTable', Vue3EasyDataTable)
