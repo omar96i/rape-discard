@@ -52,7 +52,7 @@
     @vite('resources/css/app.css')
   </head>
 
-  <body>
+  <body style="background-image: url('{{ asset('assets/icono_background.jpg')}}'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
     <!-- Content -->
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">

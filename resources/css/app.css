@@ -152,5 +152,9 @@
 	left: 0;
 }
 
+.container-portada{
+    background-image: url('/assets/icono_background.jpg') !important;
+}
+
 
 .cls-1{fill:#28744b;}.cls-1,.cls-4{stroke:#fefefe;}.cls-1,.cls-2,.cls-3,.cls-4{stroke-miterlimit:10;}.cls-2{fill:#fdb92e;}.cls-2,.cls-3{stroke:#fffff3;}.cls-3{fill:#80384f;}.cls-4{fill:#00a859;}
