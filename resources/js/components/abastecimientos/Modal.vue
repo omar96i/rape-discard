@@ -1,7 +1,7 @@
 <template>
     <!-- Modal -->
     <div class="modal fade" id="modalAbastecimiento" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" v-if="!loading_data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalFullTitle">Formulario de registro</h5>
@@ -18,10 +18,27 @@
                             <div class="mb-3">
                                 <label class="form-label">Departamento</label>
                                 <select class="form-select" v-model="data.departamento_id" :disabled="tipo == 'edit'">
+                                    <option value="1">RISARALDA</option>
+                                    <option value="2">QUINDIO</option>
                                     <option value="3">TOLIMA</option>
                                     <option value="4">CALDAS</option>
-                                    <option value="2">QUINDIO</option>
-                                    <option value="1">RISARALDA</option>
+                                    <option value="5">ANTIOQUIA</option>
+                                    <option value="6">BOGOTÁ D.C.</option>
+                                    <option value="7">BOYACÁ</option>
+                                    <option value="8">BOLIVAR</option>
+                                    <option value="9">CASANARE</option>
+                                    <option value="10">CAUCA</option>
+                                    <option value="11">CESAR</option>
+                                    <option value="12">CÓRDOBA</option>
+                                    <option value="13">CUNDINAMARCA</option>
+                                    <option value="14">HUILA</option>
+                                    <option value="15">META</option>
+                                    <option value="16">NARIÑO</option>
+                                    <option value="17">NORTE DE SANTANDER</option>
+                                    <option value="18">OTRO</option>
+                                    <option value="19">OTRO DEP</option>
+                                    <option value="20">SANTANDER</option>
+                                    <option value="21">VALLE DEL CAUCA</option>
                                 </select>
                             </div>
                         </div>
@@ -41,20 +58,11 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Alimentos</label>
-                                <select class="form-select" v-model="data.alimento_id" :disabled="tipo == 'edit'">
-                                    <option v-for="(alimento, index) in alimentos" :key="index" :value="alimento.id">{{ alimento.nombre }}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Cantidad</label>
-                                <input type="number" class="form-control" v-model="data.cantidad">
-                            </div>
+                        <div class="col-12">
+                            <label class="form-label">Alimentos</label>
+                            <select class="form-select" v-model="data.alimento_id" :disabled="tipo == 'edit'">
+                                <option v-for="(alimento, index) in alimentos" :key="index" :value="alimento.id">{{ alimento.nombre }}</option>
+                            </select>
                         </div>
 
                     </div>
@@ -125,7 +133,6 @@ export default{
                 this.data = {
                     'alimento_id' : res.data.data.id,
                     'departamento_id' : res.data.data.pivot.departamento_id,
-                    'cantidad' : res.data.data.pivot.cantidad
                 }
                 this.aux.categoria = res.data.data.categoria
                 this.getAlimentos()

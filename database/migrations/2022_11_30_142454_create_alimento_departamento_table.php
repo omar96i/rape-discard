@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('departamento_id')->constrained();
             $table->foreignId('alimento_id')->constrained();
-            $table->integer('cantidad');
             $table->timestamps();
         });
     }

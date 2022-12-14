@@ -38,5 +38,107 @@ class DepartamentoSeeder extends Seeder
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
 		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
         ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'antioquia',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'bogotá d.c.',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'boyacá',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'bolivar',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'casanare',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'cauca',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'cesar',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'córdoba',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'cundinamarca',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'huila',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'meta',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'nariño',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'norte de santander',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'otro',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'otro dep',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'santander',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('departamentos')->insert([
+            'nombre' => 'valle del cauca',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		 	'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
     }
 }

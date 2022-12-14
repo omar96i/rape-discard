@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Abastecimiento\AbastecimientoController;
+use App\Http\Controllers\Abastecimiento\DepartamentoAlimentoDepartamentoController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
 use App\Http\Controllers\Riesgo\MunicipioRiesgoController;
 use App\Models\Alimento;
 use App\Models\Departamento;
+use App\Models\DepartamentoAlimentoDepartamento;
 use App\Models\Proyect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +62,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/{departamento}/{alimento}', 'update')->name('abastecimiento.update');
         Route::get('/delete/{departamento}/{alimento}', 'delete')->name('abastecimiento.delete');
         Route::get('/get/alimentos/{categoria}', 'getAlimentos')->name('abastecimiento.get.alimentos');
+    });
+
+    Route::prefix('departamento-alimento-departamento')->controller(DepartamentoAlimentoDepartamentoController::class)->group(function () {
+        Route::get('/get', 'get')->name('departamento-alimento-departamento.get');
+        Route::post('/get/by/filtros/{departamento}', 'getByFiltros')->name('departamento-alimento-departamento.get.by.filtros');
+        Route::get('/get/data/{relacion}', 'getData')->name('departamento-alimento-departamento.get.data');
+        Route::get('/get/alimentos/{categoria}/{departamento}', 'getByCategoriaDepartamento')->name('departamento-alimento-departamento.get.categoria.departamento');
+        Route::post('/store', 'store')->name('departamento-alimento-departamento.store');
+        Route::get('/delete/{relacion}', 'delete')->name('departamento-alimento-departamento.delete');
+        Route::post('/update/{relacion}', 'update')->name('departamento-alimento-departamento.update');
+        Route::get('/get/by/{departamento}', 'findByDepartamento')->name('departamento-alimento-departamento.get.by.departamento');
     });
 
     Route::prefix('riesgo')->controller(MunicipioRiesgoController::class)->group(function () {

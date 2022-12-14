@@ -14,6 +14,10 @@ class Alimento extends Model
     ];
 
     public function departamentos(){
-        return $this->belongsToMany(Departamento::class)->withPivot('cantidad', 'departamento_id');
+        return $this->belongsToMany(Departamento::class);
+    }
+
+    public function relacion(){
+        return $this->hasMany(AlimentoDepartamento::class);
     }
 }

@@ -103,8 +103,46 @@
                 </div>
             </div>
             <div class="card mt-4" v-if="showFiltros == true && selected_map == 'abastecimiento'">
-                <div class="card-body" v-if="!loading_data">
-                    <div class="col-12 mb-2">
+                <div class="card-body row" v-if="!loading_data">
+                    <div class="col-12">
+                        <h5 class="text-capitalize">{{abastecimiento_departamento}}</h5>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label class="form-label">Fecha Inicio <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" v-model="filtros_abastecimiento.fecha_inicio">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label class="form-label">Fecha Final <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" v-model="filtros_abastecimiento.fecha_final">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label class="form-label">Departamento proveedor</label>
+                        <select class="form-select" v-model="filtros_abastecimiento.departamento_id">
+                            <option value="">Selecciona departamento</option>
+                            <option value="1">RISARALDA</option>
+                            <option value="2">QUINDIO</option>
+                            <option value="3">TOLIMA</option>
+                            <option value="4">CALDAS</option>
+                            <option value="5">ANTIOQUIA</option>
+                            <option value="6">BOGOTÁ D.C.</option>
+                            <option value="7">BOYACÁ</option>
+                            <option value="8">BOLIVAR</option>
+                            <option value="9">CASANARE</option>
+                            <option value="10">CAUCA</option>
+                            <option value="11">CESAR</option>
+                            <option value="12">CÓRDOBA</option>
+                            <option value="13">CUNDINAMARCA</option>
+                            <option value="14">HUILA</option>
+                            <option value="15">META</option>
+                            <option value="16">NARIÑO</option>
+                            <option value="17">NORTE DE SANTANDER</option>
+                            <option value="18">OTRO</option>
+                            <option value="19">OTRO DEP</option>
+                            <option value="20">SANTANDER</option>
+                            <option value="21">VALLE DEL CAUCA</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-2">
                         <label for="categoria">Categoria</label>
                         <select class="form-select" id="categoria" v-model="filtros_abastecimiento.categoria" @change="getAlimentos()">
                             <option value="">Selecciona una categoria</option>
@@ -131,7 +169,6 @@
                     </div>
 
                     <div class="row" v-if="load_chart_abastecimiento">
-                        <div class="col-12 text-center text-capitalize"><h5>{{selected_departamento}}</h5></div>
                         <div class="col-12">
                             <DoughnutChart :chartData="chartDataAbastecimiento" :options="optionsAbastecimiento"/>
                         </div>
@@ -237,13 +274,17 @@ export default{
             load_chart : false,
             filtros_abastecimiento : {
                 'categoria' : '',
-                'nombre' : ''
+                'nombre' : '',
+                'departamento_id' : '',
+                'fecha_inicio' : '',
+                'fecha_final' : ''
             },
             options_alimentos : [],
             alimentos : {},
             load_chart_abastecimiento : false,
             showFiltros : false,
-            noData : true
+            noData : true,
+            abastecimiento_departamento : ''
         }
     },
     methods:{
@@ -262,29 +303,30 @@ export default{
             this.$refs.modal_map.setData(this.selected_departamento)
         },
         getAbastecimientoData(departamento){
+            this.abastecimiento_departamento = departamento
             this.filtros_abastecimiento.categoria = ''
             this.filtros_abastecimiento.nombre = ''
-            this.showFiltros = false
-            this.load_chart_abastecimiento = false
-            this.selected_departamento = departamento
-            axios.get(`/abastecimiento/get/data/by/departamento/${this.selected_departamento}`).then(res=>{
-                this.chartDataAbastecimiento.datasets[0].data = []
-                this.chartDataAbastecimiento.labels = []
-                this.alimentos = res.data.departamento.alimentos
-                this.alimentos.forEach(alimento => {
-                    this.chartDataAbastecimiento.labels.push(alimento.nombre)
-                    this.chartDataAbastecimiento.datasets[0].data.push(alimento.pivot.cantidad)
-                });
-                if(this.alimentos.length > 0){
-                    this.showFiltros = true
-                    this.load_chart_abastecimiento = true
-                    this.noData = false
-                }else{
-                    this.noData = true
-                }
-            }).catch(error=>{
-                console.log(error.response)
-            })
+            this.showFiltros = true
+            // this.load_chart_abastecimiento = false
+            // this.selected_departamento = departamento
+            // axios.get(`/abastecimiento/get/data/by/departamento/${this.selected_departamento}`).then(res=>{
+            //     this.chartDataAbastecimiento.datasets[0].data = []
+            //     this.chartDataAbastecimiento.labels = []
+            //     this.alimentos = res.data.departamento.alimentos
+            //     this.alimentos.forEach(alimento => {
+            //         this.chartDataAbastecimiento.labels.push(alimento.nombre)
+            //         this.chartDataAbastecimiento.datasets[0].data.push(alimento.pivot.cantidad)
+            //     });
+            //     if(this.alimentos.length > 0){
+            //         this.showFiltros = true
+            //         this.load_chart_abastecimiento = true
+            //         this.noData = false
+            //     }else{
+            //         this.noData = true
+            //     }
+            // }).catch(error=>{
+            //     console.log(error.response)
+            // })
         },
         getDataMunicipio(municipio){
             this.load_chart = false
@@ -320,16 +362,10 @@ export default{
         },
         getByFiltros(){
             this.load_chart_abastecimiento = false
-            axios.post(`/abastecimiento/get/data/by/filtros/${this.selected_departamento}`, this.filtros_abastecimiento).then(res=>{
+            axios.post(`/departamento-alimento-departamento/get/by/filtros/${this.abastecimiento_departamento}`, this.filtros_abastecimiento).then(res=>{
                 this.chartDataAbastecimiento.datasets[0].data = []
                 this.chartDataAbastecimiento.labels = []
-                if(res.data.alimento.length > 0){
-                    for (let index = 0; index < res.data.alimento.length; index++) {
-                        this.chartDataAbastecimiento.datasets[0].data.push(res.data.cantidad[index].pivot.cantidad)
-                        this.chartDataAbastecimiento.labels.push(res.data.alimento[index].nombre)
-                    }
-                    this.load_chart_abastecimiento = true
-                }
+                console.log(res.data)
             }).catch(error=>{
                 console.log(error.response)
             })
