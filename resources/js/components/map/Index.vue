@@ -167,7 +167,9 @@
                     <div class="col-12 mb-4">
                         <button class="btn btn-primary" @click="getByFiltros()">Buscar datos</button>
                     </div>
-
+                    <div class="card mt-4" v-if="abastecimiento_alert">
+                        <div class="col-12 text-center"><h4>Sin datos a analizar</h4></div>
+                    </div>
                     <div class="row" v-if="load_chart_abastecimiento">
                         <div class="col-12">
                             <DoughnutChart :chartData="chartDataAbastecimiento" :options="optionsAbastecimiento"/>
@@ -180,9 +182,7 @@
                     <spinner-view></spinner-view>
                 </div>
             </div>
-            <div class="card mt-4" v-if="!showFiltros && selected_map == 'abastecimiento'">
-                <div class="col-12 text-center"><h4>Sin datos a analizar</h4></div>
-            </div>
+
         </div>
     </div>
 
@@ -284,7 +284,8 @@ export default{
             load_chart_abastecimiento : false,
             showFiltros : false,
             noData : true,
-            abastecimiento_departamento : ''
+            abastecimiento_departamento : '',
+            abastecimiento_alert : false
         }
     },
     methods:{
@@ -362,10 +363,34 @@ export default{
         },
         getByFiltros(){
             this.load_chart_abastecimiento = false
+            this.abastecimiento_alert = false
             axios.post(`/departamento-alimento-departamento/get/by/filtros/${this.abastecimiento_departamento}`, this.filtros_abastecimiento).then(res=>{
                 this.chartDataAbastecimiento.datasets[0].data = []
                 this.chartDataAbastecimiento.labels = []
                 console.log(res.data)
+                if(res.data.status == 'find_departamento'){
+                    if (res.data.data.length > 0) {
+                        res.data.data.forEach(element => {
+                            this.chartDataAbastecimiento.datasets[0].data.push(element.cantidad)
+                            this.chartDataAbastecimiento.labels.push(element.alimento.alimento.nombre)
+                        });
+                        this.load_chart_abastecimiento = true
+                    }else{
+                        this.abastecimiento_alert = true
+                    }
+                }
+                if(res.data.status == 'find_sin_departamento'){
+                    if(res.data.data.length > 0){
+                        for (let index = 0; index < res.data.header.length; index++) {
+                            this.chartDataAbastecimiento.datasets[0].data.push(res.data.data[index])
+                            this.chartDataAbastecimiento.labels.push(res.data.header[index])
+                        }
+                        this.load_chart_abastecimiento = true
+                    }else{
+                        this.abastecimiento_alert = true
+                    }
+                }
+
             }).catch(error=>{
                 console.log(error.response)
             })

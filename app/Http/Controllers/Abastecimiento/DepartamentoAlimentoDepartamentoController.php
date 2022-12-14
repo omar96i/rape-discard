@@ -47,10 +47,27 @@ class DepartamentoAlimentoDepartamentoController extends Controller
             })->whereHas('departamento', function($query) use($departamento){
                 $query->where('nombre', $departamento);
             })->where('fecha', '>=', $request->fecha_inicio)->where('fecha', '<=', $request->fecha_final)->with('alimento.alimento')->get();
+            return response()->json(['data' => $consulta, 'status' => 'find_departamento']);
         }else{
-            $consulta = DepartamentoAlimentoDepartamento::with('countRelationAlimento')->get();
+            $departamentos = Departamento::select('nombre')->get();
+            $departamentos_alimentos = [];
+            $departamentos_count = [];
+            foreach ($departamentos as $key => $value) {
+                $contador = DepartamentoAlimentoDepartamento::whereHas('alimento.departamento', function($query) use($value){
+                    $query->where('nombre', $value->nombre);
+                })->whereHas('alimento.alimento', function($query) use($request){
+                    $query->where('nombre', 'like', '%'.$request->nombre.'%')->where('categoria', 'like', '%'.$request->categoria.'%');
+                })->whereHas('departamento', function($query) use($departamento){
+                    $query->where('nombre', $departamento);
+                })->count();
+                if($contador > 0){
+                    array_push($departamentos_alimentos, $value->nombre);
+                    array_push($departamentos_count, $contador);
+                }
+            }
+            return response()->json(['header' => $departamentos_alimentos, 'data' => $departamentos_count, 'status' => 'find_sin_departamento']);
         }
-        return response()->json(['data' => $consulta]);
+
     }
 
     public function getByCategoriaDepartamento($categoria,Departamento $departamento){
