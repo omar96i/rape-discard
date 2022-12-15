@@ -47,7 +47,7 @@
                                             <div style="width: 500px;">
                                                 <div class="card-header">
                                                     <div class="d-flex justify-content-between">
-                                                        <h1 class="text-capitalize">{{selected_ubicacion.datos.nombre}}</h1>
+                                                        <h5 class="text-capitalize">{{selected_ubicacion.datos.nombre}}</h5>
                                                         <img :src="(selected_ubicacion.datos.logo == null) ? ((selected_ubicacion.datos.tipo_de_turismo == 'aventura')? './assets/default_icons/aventura.svg' : ((selected_ubicacion.datos.tipo_de_turismo == 'turismo verde y experiencias')? './assets/default_icons/turismo_verde.svg' : ((selected_ubicacion.datos.tipo_de_turismo == 'atractivo turistico')? './assets/default_icons/atractivo_turistico.svg':((selected_ubicacion.datos.tipo_de_turismo == 'hospedaje')? './assets/default_icons/hospedaje.svg':'./assets/img/default_logo.png')))) : `./public/logo/${selected_ubicacion.datos.logo}`"  style="border-radius: 50%; border: solid 0.2em; height: 55px;">
                                                     </div>
                                                 </div>
