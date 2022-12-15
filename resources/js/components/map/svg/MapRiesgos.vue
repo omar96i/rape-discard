@@ -244,16 +244,16 @@ export default{
                     numero = this.data[j].c_educat + numero
                     numero = this.data[j].c_comunit + numero
                     numero = this.data[j].hectareas + numero
-                    if(numero >= 0 && numero <= 4499){
+                    if(numero >= 0 && numero <= 299){  // 4499
                         this.municipios[index].municipio = 'rango1'
                     }
-                    if(numero >= 4500 && numero <= 8999){
+                    if(numero >= 300 && numero <= 599){
                         this.municipios[index].municipio = 'rango2'
                     }
-                    if(numero >= 9000 && numero <= 13499){
+                    if(numero >= 600 && numero <= 899){
                         this.municipios[index].municipio = 'rango3'
                     }
-                    if(numero >= 13500){
+                    if(numero >= 900){
                         this.municipios[index].municipio = 'rango4'
                     }
                 }
