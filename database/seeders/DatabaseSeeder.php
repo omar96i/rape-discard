@@ -19,17 +19,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            AlimentoSeeder::class,
-            DepartamentoSeeder::class,
-            MunicipioSeeder::class
+            ProyectSeeder::class,
         ]);
-        DB::table('users')->insert([
-			'email' => 'admin@gmail.com',
-			'name' => 'admin',
-			'password' => bcrypt('12345678'),
-			'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-			'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-		]);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

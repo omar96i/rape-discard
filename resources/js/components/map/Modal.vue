@@ -108,7 +108,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="img-container">
-                                                <img :src="(oferta.logo == null) ? ((oferta.tipo_de_turismo == 'aventura')? './assets/default_icons/aventura.svg' : ((oferta.tipo_de_turismo == 'turismo verde y experiencias')? './assets/default_icons/turismo_verde.svg' : ((oferta.tipo_de_turismo == 'atractivo turistico')? './assets/default_icons/atractivo_turistico.svg':((oferta.tipo_de_turismo == 'hospedaje')? './assets/default_icons/hospedaje.svg':'')))) : `./public/logo/${oferta.logo}`"  style="position: absolute; z-index: 1; border-radius: 50%; border: solid 0.2em; height: 80px;">
+                                                <img :src="(oferta.logo == null) ? ((oferta.tipo_de_turismo == 'aventura')? './assets/default_icons/aventura.svg' : ((oferta.tipo_de_turismo == 'turismo verde y experiencias')? './assets/default_icons/turismo_verde.svg' : ((oferta.tipo_de_turismo == 'atractivo turistico')? './assets/default_icons/atractivo_turistico.svg':((oferta.tipo_de_turismo == 'hospedaje')? './assets/default_icons/hospedaje.svg':'./assets/img/default_logo.png')))) : `./public/logo/${oferta.logo}`"  style="position: absolute; z-index: 1; border-radius: 50%; border: solid 0.2em; height: 80px;">
                                                 <div class="col-12">
                                                     <img :src="(oferta.foto_portada == null) ? './assets/img/default_portada.png' : `./public/portada/${oferta.foto_portada}`" alt="" style="width: 100%; height: 150px;">
                                                 </div>
