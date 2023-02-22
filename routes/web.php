@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Abastecimiento\AbastecimientoController;
 use App\Http\Controllers\Abastecimiento\DepartamentoAlimentoDepartamentoController;
+use App\Http\Controllers\Institucion\InstitucionController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
 use App\Http\Controllers\Riesgo\MunicipioRiesgoController;
@@ -85,6 +86,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get/municipios/{departamento}', 'getMunicipioByDepartamento')->name('riesgo.get.municipios');
         Route::post('/store', 'store')->name('riesgo.store');
         Route::post('/update/{riesgo}', 'update')->name('riesgo.update');
+    });
+
+    Route::prefix('institucion')->controller(InstitucionController::class)->group(function () {
+        Route::get('/', 'index')->name('institucion.index');
+        Route::get('/get', 'get')->name('institucion.get');
+        Route::post('/import', 'importExcel')->name('institucion.import.excel');
+        Route::get('/export', 'export')->name('institucion.export.excel');
     });
 
 });

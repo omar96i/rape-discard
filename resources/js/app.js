@@ -9,6 +9,7 @@ import IndexMap from './components/map/Index.vue'
 import IndexAbastecimiento from './components/abastecimientos/Index.vue'
 import IndexRiesgo from './components/riesgos/Index.vue'
 import IndexSegundo from './components/Segundo.vue'
+import IndexInstitucion from './components/instituciones/Index.vue'
 
 import $ from 'jquery';
 window.$ = $;
@@ -28,6 +29,7 @@ const app = createApp({
         'index-abastecimiento' : IndexAbastecimiento,
         'index-riesgo' : IndexRiesgo,
         'index-segundo' : IndexSegundo,
+        'index-institucion' : IndexInstitucion,
     },
 },);
 app.component('EasyDataTable', Vue3EasyDataTable)
