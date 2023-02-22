@@ -1,13 +1,6 @@
 <template>
     <div class="col-12">
-        <div class="col-12">
-            <a class="btn btn-primary mr-4" href="/institucion/export" target="_blank" @click="exportExcel()">
-                Exportar Excel
-            </a>
-            <!-- <button type="button" class="btn btn-primary" @click="info">
-                Importar Excel
-            </button> -->
-        </div>
+
         <EasyDataTable class="mt-4"
             :headers="headers"
             :items="items"
