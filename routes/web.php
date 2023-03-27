@@ -9,6 +9,7 @@ use App\Http\Controllers\Riesgo\MunicipioRiesgoController;
 use App\Models\Alimento;
 use App\Models\Departamento;
 use App\Models\DepartamentoAlimentoDepartamento;
+use App\Models\Establecimiento;
 use App\Models\Proyect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return view('pruebas');
+    return Establecimiento::has('instituciones')->with('instituciones')->get();
 });
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
@@ -91,7 +92,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('institucion')->controller(InstitucionController::class)->group(function () {
         Route::get('/', 'index')->name('institucion.index');
         Route::get('/get', 'get')->name('institucion.get');
+        Route::get('/get/filtro/{establecimiento}', 'getByFiltro')->name('institucion.get');
+        Route::get('/getEstablecimientos', 'getEstablecimientos')->name('institucion.getEstablecimientos');
         Route::post('/import', 'importExcel')->name('institucion.import.excel');
+        Route::post('/store', 'store')->name('institucion.store');
         Route::get('/export', 'export')->name('institucion.export.excel');
     });
 

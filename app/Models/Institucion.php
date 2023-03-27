@@ -12,13 +12,12 @@ class Institucion extends Model
     protected $table = 'instituciones';
 
     protected $fillable = [
+        'establecimiento_id',
         'territorio',
-        'fid_colegio',
-        'id_institucion',
         'municipio',
         'nombre_institucion',
-        'norte',
-        'este',
+        'nombre',
+        'cod_dane_municipio',
         'cod_dane',
         'sede',
         'cod_dane_sede',
@@ -28,5 +27,16 @@ class Institucion extends Model
         'modalidad',
         'latitud',
         'longitud',
+        'zona',
+        'direccion_2',
+        'telefono',
+        'estado_sede',
+        'niveles',
+        'grados',
+        'modelos',
     ];
+
+    public function establecimiento(){
+        return $this->belongsTo(Establecimiento::class, 'establecimiento_id');
+    }
 }

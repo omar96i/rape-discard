@@ -1,113 +1,51 @@
 <template>
     <div class="col-12">
-
-        <EasyDataTable class="mt-4"
-            :headers="headers"
-            :items="items"
-            border-cell
-            buttons-pagination
-        >
-            <template #item-logo="items">
-                <div class="customize-header">
-                    <div class="avatar">
-                        <img :src="(items.logo == null) ? ((items.tipo_de_turismo == 'aventura')? './assets/default_icons/aventura.svg' : ((items.tipo_de_turismo == 'turismo verde y experiencias')? './assets/default_icons/turismo_verde.svg' : ((items.tipo_de_turismo == 'atractivo turistico')? './assets/default_icons/atractivo_turistico.svg':((items.tipo_de_turismo == 'hospedaje')? './assets/default_icons/hospedaje.svg':'./assets/img/default_logo.png')))) : `./public/logo/${items.logo}`" class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                </div>
-            </template>
-
-            <template #item-actions="item">
-                <div class="operation-wrapper">
-                    <a href="#" class="btn btn-primary btn-sm" @click="action('edit', item.id)" data-bs-toggle="modal" data-bs-target="#fullscreenModal"><i class='bx bxs-edit'></i></a>
-                    <a href="#" class="btn btn-danger btn-sm" @click="action('delete', item.id)"><i class='bx bx-message-alt-x' ></i></a>
-                </div>
-            </template>
-
-        </EasyDataTable>
+        <button class="btn btn-primary m-1" :class="{'active' : loadTableEstablecimiento}" @click="selectTable()">Establecimientos</button>
+        <button class="btn btn-primary" :class="{'active' : loadTable}" @click="selectType('general')">Instituciones</button>
+    </div>
+    <div class="col-12" v-if="loadTable">
+        <table-instituciones-vue :type="type" :id="id"></table-instituciones-vue>
+    </div>
+    <div class="col-12" v-if="loadTableEstablecimiento">
+        <table-establecimiento-vue></table-establecimiento-vue>
     </div>
 </template>
 
 <script lang="ts">
-    import axios from "axios";
-    import { ref } from "vue";
+    import TableEstablecimientoVue from './TableEstablecimiento.vue'
+    import TableInstitucionesVue from './TableInstituciones.vue'
     export default{
+        components:{
+            TableInstitucionesVue,
+            TableEstablecimientoVue
+        },
         data(){
             return{
-                headers: [
-                    { text: "Territorio", value: "territorio" },
-                    { text: "FID Colegio", value: "fid_colegio"},
-                    { text: "ID", value: "id_institucion"},
-                    { text: "MUNICIPIO", value: "municipio"},
-                    { text: "NOMBRE DE INSTITUCION", value: "nombre_institucion"},
-                    { text: "NORTE", value: "norte"},
-                    { text: "ESTE", value: "este"},
-                    { text: "CODIGO DANE", value: "cod_dane"},
-                    { text: "SEDE", value: "sede"},
-                    { text: "ESTADO", value: "estado"},
-                    { text: "UBICACION", value: "ubicacion"},
-                    { text: "DIRECCION", value: "direccion"},
-                    { text: "MODALIDAD", value: "modalidad"},
-                    { text: "LATITUD", value: "latitud"},
-                    { text: "LONGITUD", value: "longitud"},
-                    { text: "CODIGO DANE SEDE", value: "cod_dane_sede"},
-                    { text: "Acciones", value: "actions"},
-                ],
-                items : [],
-                loading : false
-
+                type : 'general',
+                loading : false,
+                loadTable : false,
+                loadTableEstablecimiento : true,
+                id : '',
             }
         },
         created(){
-            this.getData()
         },
         methods:{
-            action(tipo,id = false){
-                if(tipo == 'delete'){
-                    //this.deleteData(id)
-                    return
+            selectType(type, id = false){
+                this.type = type
+                if(id){
+                    this.id = id
                 }
-                //this.$refs.modal_form.setData(tipo, id)
+                this.loadTableEstablecimiento = false
+                this.loadTable = true
             },
-            getData(){
-                axios.get('/institucion/get').then(res=>{
-                    this.items = res.data.instituciones
+            selectTable(){
+                this.type = 'general'
+                this.id = ''
+                this.loadTable = false
+                this.loadTableEstablecimiento = true
+            },
 
-                }).catch(res=>{
-                    console.log(res.response)
-                })
-            },
-            deleteData(id){
-                this.$swal({
-                    title: 'Usuario',
-                    text: 'Estas Seguro de eliminar el usuario seleccionado?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Eliminar',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonColor: '#FF0000',
-                }).then((result) => {
-                    if(result.value){
-                        axios.get(`/ofertas-turisticas/delete/${id}`).then(res=>{
-                            if(res.data.status){
-                                this.$swal({
-                                    title: 'Registro',
-                                    text: 'Eliminado',
-                                    icon: 'success',
-                                    timer: 3000
-                                })
-                                this.getData()
-                            }
-                        }).catch(error=>{
-                            console.log(error.response)
-                            this.$swal({
-                                title: 'Registro',
-                                text: 'Error en el servidor',
-                                icon: 'error',
-                                timer: 3000
-                            })
-                        })
-                    }
-                });
-            }
         }
     }
 
