@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class InstitucionController extends Controller
 {
     public function importExcel(Request $request){
-        Excel::import(new ImportEstablecimiento, $request->file('file'));
+        //Excel::import(new ImportEstablecimiento, $request->file('file'));
         Excel::import(new ImportInstitucion, $request->file('file'));
         return response()->json(['status' => true]);
     }
