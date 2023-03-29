@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Abastecimiento\AbastecimientoController;
 use App\Http\Controllers\Abastecimiento\DepartamentoAlimentoDepartamentoController;
+use App\Http\Controllers\Institucion\EstablecimientoController;
 use App\Http\Controllers\Institucion\InstitucionController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\OfertaTurista\OfertaTuristicaController;
@@ -99,4 +100,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/export', 'export')->name('institucion.export.excel');
     });
 
+    Route::prefix('establecimiento')->controller(EstablecimientoController::class)->group(function () {
+        Route::post('/store', 'store')->name('establecimiento.store');
+        Route::post('/update/{establecimiento}', 'update')->name('establecimiento.update');
+        Route::get('/delete/{establecimiento}', 'delete')->name('establecimiento.delete');
+        Route::get('/get/{establecimiento}', 'getById')->name('establecimiento.get');
+    });
 });
