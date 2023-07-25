@@ -15,8 +15,12 @@ class IndicadorController extends Controller
         return response()->json(['status' => true]);
     }
 
-    public function get(){
-        return response()->json(['status' => true, 'indicadores' => Indicador::get()]);
+    public function get(Request $request)
+    {
+        $perPage = $request->input('per_page', 10); // Obtener el número de elementos por página (por defecto 10)
+        $indicadores = Indicador::paginate($perPage);
+
+        return response()->json(['status' => true, 'indicadores' => $indicadores]);
     }
 
     public function index(){
