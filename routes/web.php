@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Abastecimiento\AbastecimientoController;
 use App\Http\Controllers\Abastecimiento\DepartamentoAlimentoDepartamentoController;
+use App\Http\Controllers\IndicadorController;
 use App\Http\Controllers\Institucion\EstablecimientoController;
 use App\Http\Controllers\Institucion\InstitucionController;
 use App\Http\Controllers\MapController;
@@ -98,6 +99,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/import', 'importExcel')->name('institucion.import.excel');
         Route::post('/store', 'store')->name('institucion.store');
         Route::get('/export', 'export')->name('institucion.export.excel');
+    });
+
+    Route::prefix('indicador')->controller(IndicadorController::class)->group(function () {
+        Route::post('/import', 'importExcel')->name('indicador.import.excel');
+        Route::get('/get', 'get')->name('indicador.get');
+        Route::get('/', 'index')->name('indicador.index');
     });
 
     Route::prefix('establecimiento')->controller(EstablecimientoController::class)->group(function () {
