@@ -60,7 +60,7 @@
             <li class="menu-item {{ Request::routeIs('indicador.index') ? 'active' : '' }}">
                 <a href="{{ route('indicador.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-detail"></i>
-                    <div data-i18n="Analytics">Indicadores</div>
+                    <div data-i18n="Analytics">ODS</div>
                 </a>
             </li>
         </li>
